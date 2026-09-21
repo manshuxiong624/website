@@ -1,0 +1,67 @@
+---
+title: "What Is a p-Value? A Coin, a Surprise, and a Common Mistake"
+date: 2026-09-14
+categories:
+  - statistics
+  - data-science
+---
+
+You flip a coin 20 times and get 15 heads. That seems suspicious: a fair coin should produce heads about half the time. But fair coins do not alternate perfectly between heads and tails. Random variation can produce an uneven result.
+
+So how much evidence does this outcome provide against the claim that the coin is fair?
+
+A **p-value** helps us answer this question by asking how unusual the result would be under a particular assumption. Understanding that starting assumption is the key to interpreting the number correctly.
+
+## Start by assuming the coin is fair
+
+Our starting claim, called the **null hypothesis**, is that the probability of heads is 0.5. We also assume that the flips are independent, and we decide in advance to flip exactly 20 times.
+
+Before collecting the data, we choose a two-sided test: we will look for evidence that the coin favors either heads or tails.
+
+Under these assumptions, we expect about 10 heads. Getting 15 heads is five away from that expectation. An equally extreme outcome in the opposite direction would be getting only 5 heads.
+
+The p-value therefore includes the probability of getting **15 or more heads, or 5 or fewer heads**, assuming the coin is fair.
+
+Let $X$ be the number of heads. Under the null hypothesis, $X \sim \mathrm{Binomial}(20, 0.5)$, so
+
+$$
+p = P(X \geq 15) + P(X \leq 5) \approx 0.0414.
+$$
+
+In everyday language: **if we repeatedly conducted this experiment with a fair coin, about 4.14% of experiments would produce a result at least this far from 10 heads.**
+
+This is a hypothetical example; no external dataset is used.
+
+## Why include results “more extreme”?
+
+Why count 16, 17, or even 20 heads when we observed exactly 15?
+
+Because we are evaluating how strongly the result departs from the null hypothesis. If 15 heads makes us suspicious, 20 heads should also count as evidence of a departure.
+
+The probability of one exact outcome does not capture this idea. Indeed, every particular ordered sequence of 20 fair coin flips has the same probability, $1/2^{20}$. A perfectly ordinary mixed sequence is individually just as unlikely as an all-heads sequence.
+
+Our test instead groups outcomes according to a feature chosen in advance: how far the number of heads is from 10.
+
+## The mistake that makes p-values confusing
+
+It is tempting to interpret $p = 0.0414$ as saying there is only a 4.14% probability that the coin is fair. That reverses the question.
+
+We calculated the probability of certain outcomes **assuming fairness**. We did not calculate the probability of fairness **given the outcomes**.
+
+The distinction resembles the difference between “How likely is a wet sidewalk when it rains?” and “How likely is rain when the sidewalk is wet?” Sprinklers can also wet sidewalks. Reversing the question requires additional information.
+
+Similarly, assigning a probability to the coin being fair requires a broader model, including assumptions about possible biases and their prior plausibility. The American Statistical Association explicitly cautions that p-values do not give the probability that a hypothesis is true. ([ASA statement](https://doi.org/10.1080/00031305.2016.1154108))
+
+## Does below 0.05 mean we have proved something?
+
+Using a significance threshold of 0.05 chosen in advance, we would reject the fair-coin null hypothesis in this example. However, rejection is a decision under a testing rule, not proof that fairness is impossible.
+
+Nor is 0.05 a magical boundary. Results with p-values of 0.049 and 0.051 provide very similar information, even though they fall on opposite sides of that threshold.
+
+A p-value also does not measure practical importance. In an economics study, a large sample might detect a tiny wage difference that has little economic relevance. A smaller study might fail to detect a meaningful difference because its estimate is imprecise. Effect sizes, uncertainty, and study design therefore belong alongside the p-value. ([ASA statement](https://doi.org/10.1080/00031305.2016.1154108))
+
+## The takeaway
+
+A p-value asks: **assuming the null hypothesis and the statistical model are correct, how often would we observe a test result this extreme or more extreme?**
+
+A small answer flags a mismatch between the observations and those assumptions. It does not tell us the probability that our hypothesis is wrong, prove a discovery, or establish that an effect matters. Its value comes from helping us evaluate evidence while keeping those distinctions clear.
