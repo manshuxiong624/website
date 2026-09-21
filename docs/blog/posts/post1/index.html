@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-09-14">
 
-<title>About Me – Manshu Xiong</title>
+<title>What Is a p-Value? A Coin, a Surprise, and a Common Mistake – Manshu Xiong</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,23 +27,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,8 +72,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -82,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Manshu Xiong</span>
     </a>
   </div>
@@ -93,19 +123,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./bio.html" aria-current="page"> 
+    <a class="nav-link" href="../../../bio.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resume.html"> 
+    <a class="nav-link" href="../../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog/index.html"> 
+    <a class="nav-link" href="../../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -125,14 +155,24 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About Me</h1>
-</div>
+<h1 class="title">What Is a p-Value? A Coin, a Surprise, and a Common Mistake</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">statistics</div>
+    <div class="quarto-category">data-science</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 14, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -142,32 +182,46 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Write a short biography here.</p>
-<p>Include:</p>
-<ul>
-<li>Educational background</li>
-<li>Professional interests</li>
-<li>Technical skills</li>
-<li>Career goals</li>
-</ul>
-<section id="education" class="level2">
-<h2 class="anchored" data-anchor-id="education">Education</h2>
-<p>Master of Applied Economics and Data Science, University of Pennsylvania (expaceted 2027) Batelor of Science, University Name 2026</p>
+<p>You flip a coin 20 times and get 15 heads. That seems suspicious: a fair coin should produce heads about half the time. But fair coins do not alternate perfectly between heads and tails. Random variation can produce an uneven result.</p>
+<p>So how much evidence does this outcome provide against the claim that the coin is fair?</p>
+<p>A <strong>p-value</strong> helps us answer this question by asking how unusual the result would be under a particular assumption. Understanding that starting assumption is the key to interpreting the number correctly.</p>
+<section id="start-by-assuming-the-coin-is-fair" class="level2">
+<h2 class="anchored" data-anchor-id="start-by-assuming-the-coin-is-fair">Start by assuming the coin is fair</h2>
+<p>Our starting claim, called the <strong>null hypothesis</strong>, is that the probability of heads is 0.5. We also assume that the flips are independent, and we decide in advance to flip exactly 20 times.</p>
+<p>Before collecting the data, we choose a two-sided test: we will look for evidence that the coin favors either heads or tails.</p>
+<p>Under these assumptions, we expect about 10 heads. Getting 15 heads is five away from that expectation. An equally extreme outcome in the opposite direction would be getting only 5 heads.</p>
+<p>The p-value therefore includes the probability of getting <strong>15 or more heads, or 5 or fewer heads</strong>, assuming the coin is fair.</p>
+<p>Let <span class="math inline">\(X\)</span> be the number of heads. Under the null hypothesis, <span class="math inline">\(X \sim \mathrm{Binomial}(20, 0.5)\)</span>, so</p>
+<p><span class="math display">\[
+p = P(X \geq 15) + P(X \leq 5) \approx 0.0414.
+\]</span></p>
+<p>In everyday language: <strong>if we repeatedly conducted this experiment with a fair coin, about 4.14% of experiments would produce a result at least this far from 10 heads.</strong></p>
+<p>This is a hypothetical example; no external dataset is used.</p>
 </section>
-<section id="interests" class="level2">
-<h2 class="anchored" data-anchor-id="interests">Interests</h2>
-<ul>
-<li>Econometrics</li>
-<li>Machine Learning</li>
-<li>Data Analysis</li>
-</ul>
+<section id="why-include-results-more-extreme" class="level2">
+<h2 class="anchored" data-anchor-id="why-include-results-more-extreme">Why include results “more extreme”?</h2>
+<p>Why count 16, 17, or even 20 heads when we observed exactly 15?</p>
+<p>Because we are evaluating how strongly the result departs from the null hypothesis. If 15 heads makes us suspicious, 20 heads should also count as evidence of a departure.</p>
+<p>The probability of one exact outcome does not capture this idea. Indeed, every particular ordered sequence of 20 fair coin flips has the same probability, <span class="math inline">\(1/2^{20}\)</span>. A perfectly ordinary mixed sequence is individually just as unlikely as an all-heads sequence.</p>
+<p>Our test instead groups outcomes according to a feature chosen in advance: how far the number of heads is from 10.</p>
 </section>
-<section id="contact" class="level2">
-<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<section id="the-mistake-that-makes-p-values-confusing" class="level2">
+<h2 class="anchored" data-anchor-id="the-mistake-that-makes-p-values-confusing">The mistake that makes p-values confusing</h2>
+<p>It is tempting to interpret <span class="math inline">\(p = 0.0414\)</span> as saying there is only a 4.14% probability that the coin is fair. That reverses the question.</p>
+<p>We calculated the probability of certain outcomes <strong>assuming fairness</strong>. We did not calculate the probability of fairness <strong>given the outcomes</strong>.</p>
+<p>The distinction resembles the difference between “How likely is a wet sidewalk when it rains?” and “How likely is rain when the sidewalk is wet?” Sprinklers can also wet sidewalks. Reversing the question requires additional information.</p>
+<p>Similarly, assigning a probability to the coin being fair requires a broader model, including assumptions about possible biases and their prior plausibility. The American Statistical Association explicitly cautions that p-values do not give the probability that a hypothesis is true. (<a href="https://doi.org/10.1080/00031305.2016.1154108">ASA statement</a>)</p>
 </section>
-<section id="studentemail.edu" class="level2">
-<h2 class="anchored" data-anchor-id="studentemail.edu">student@email.edu</h2>
-<hr>
+<section id="does-below-0.05-mean-we-have-proved-something" class="level2">
+<h2 class="anchored" data-anchor-id="does-below-0.05-mean-we-have-proved-something">Does below 0.05 mean we have proved something?</h2>
+<p>Using a significance threshold of 0.05 chosen in advance, we would reject the fair-coin null hypothesis in this example. However, rejection is a decision under a testing rule, not proof that fairness is impossible.</p>
+<p>Nor is 0.05 a magical boundary. Results with p-values of 0.049 and 0.051 provide very similar information, even though they fall on opposite sides of that threshold.</p>
+<p>A p-value also does not measure practical importance. In an economics study, a large sample might detect a tiny wage difference that has little economic relevance. A smaller study might fail to detect a meaningful difference because its estimate is imprecise. Effect sizes, uncertainty, and study design therefore belong alongside the p-value. (<a href="https://doi.org/10.1080/00031305.2016.1154108">ASA statement</a>)</p>
+</section>
+<section id="the-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="the-takeaway">The takeaway</h2>
+<p>A p-value asks: <strong>assuming the null hypothesis and the statistical model are correct, how often would we observe a test result this extreme or more extreme?</strong></p>
+<p>A small answer flags a mismatch between the observations and those assumptions. It does not tell us the probability that our hypothesis is wrong, prove a discovery, or establish that an effect matters. Its value comes from helping us evaluate evidence while keeping those distinctions clear.</p>
 
 
 </section>
@@ -577,7 +631,7 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="./images/UniversityofPennsylvania_FullLogo_RGB.png" class="img-fluid" width="100"></p>
+<p><img src="../../../images/UniversityofPennsylvania_FullLogo_RGB.png" class="img-fluid" width="100"></p>
 </div>   
     <div class="nav-footer-center">
 <p>© 2026 Manshu Xiong</p>

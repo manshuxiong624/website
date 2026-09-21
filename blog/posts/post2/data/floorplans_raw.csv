@@ -1,0 +1,60 @@
+slug,property,location_heading,model_raw,beds_raw,baths_raw,rent_raw,sqft_raw,source_url,retrieved_at_utc
+westfield-apartments,Westfield Apartments,Philadelphia Apartments in Wynnefield,Studio | 1 Bath,Studio,1,Starting At $999,350,https://galmangroup.com/property/westfield-apartments/,2026-09-21T20:44:51Z
+westfield-apartments,Westfield Apartments,Philadelphia Apartments in Wynnefield,1 Bed | 1 Bath,1,1,"Starting At $1,399",665,https://galmangroup.com/property/westfield-apartments/,2026-09-21T20:44:51Z
+westfield-apartments,Westfield Apartments,Philadelphia Apartments in Wynnefield,2 Bed | 1 Bath,2,1,"Starting At $1,699",945,https://galmangroup.com/property/westfield-apartments/,2026-09-21T20:44:51Z
+265-flats,265 Flats,Mt. Airy Apartments at 265 Flats,1 Bed | 1 Bath,1,1,"Starting At $1,450",625,https://galmangroup.com/property/265-flats/,2026-09-21T20:44:53Z
+265-flats,265 Flats,Mt. Airy Apartments at 265 Flats,2 Bed | 1 Bath,2,1,"Starting At $1,624",900,https://galmangroup.com/property/265-flats/,2026-09-21T20:44:53Z
+algon-flats,Algon Flats,"Apartments in Rhawnhurst, Northeast Philadelphia",Studio | 1 Bath,0,1,Call for Availability,500,https://galmangroup.com/property/algon-flats/,2026-09-21T20:45:02Z
+algon-flats,Algon Flats,"Apartments in Rhawnhurst, Northeast Philadelphia",1 Bed | 1 Bath,1,1,"Starting at $1,520",733,https://galmangroup.com/property/algon-flats/,2026-09-21T20:45:02Z
+algon-flats,Algon Flats,"Apartments in Rhawnhurst, Northeast Philadelphia",2 Bed | 1 Bath,2,1,"Starting at $1,650",830,https://galmangroup.com/property/algon-flats/,2026-09-21T20:45:02Z
+canterbury-apartments,Canterbury Apartments,Charming 2-Bedroom Rentals in Mt. Airy,2 Bedroom,2,1,"Starting At $1,982",745,https://galmangroup.com/property/canterbury-apartments/,2026-09-21T20:45:11Z
+chestnut-terrace,Chestnut Terrace,Apartments in East Mount Airy Near Chestnut Hill,1 Bed | 1 Bath,1,1,"Starting at $1,590",690,https://galmangroup.com/property/chestnut-terrace/,2026-09-21T20:45:13Z
+chestnut-terrace,Chestnut Terrace,Apartments in East Mount Airy Near Chestnut Hill,2 Bed | 1 Bath,2,1,Call for Availability,950,https://galmangroup.com/property/chestnut-terrace/,2026-09-21T20:45:13Z
+coventry-apartments,Coventry House,Apartments for Rent in Philadelphia’s Fox Chase,Studio | 1 Bath,0,1,Call for Availability,388,https://galmangroup.com/property/coventry-apartments/,2026-09-21T20:45:15Z
+coventry-apartments,Coventry House,Apartments for Rent in Philadelphia’s Fox Chase,1 Bed Jr | 1 Bath,1,1,"Starting at $1,295",498,https://galmangroup.com/property/coventry-apartments/,2026-09-21T20:45:15Z
+coventry-apartments,Coventry House,Apartments for Rent in Philadelphia’s Fox Chase,1 Bed | 1 Bath,1,1,Call for Availability,619,https://galmangroup.com/property/coventry-apartments/,2026-09-21T20:45:15Z
+coventry-apartments,Coventry House,Apartments for Rent in Philadelphia’s Fox Chase,2 Bed | 1 Bath,2,1,"Starting at $1,215",822,https://galmangroup.com/property/coventry-apartments/,2026-09-21T20:45:15Z
+donna-court,Donna Court,Roxborough Apartments,1 Bedroom,1,1,"Starting at $1,249",561,https://galmangroup.com/property/donna-court/,2026-09-21T20:45:17Z
+donna-court,Donna Court,Roxborough Apartments,2 Bedroom,2,1,Call for Availability,703,https://galmangroup.com/property/donna-court/,2026-09-21T20:45:17Z
+dupont-towers,Dupont Towers,"Apartments in Roxborough, PA",1 Bedroom,1,1,"Starting At $1,750",869,https://galmangroup.com/property/dupont-towers/,2026-09-21T20:45:20Z
+dupont-towers,Dupont Towers,"Apartments in Roxborough, PA",2 Bedroom,2,2,"Starting At $1,910",990,https://galmangroup.com/property/dupont-towers/,2026-09-21T20:45:20Z
+forest-station,Forest Station,Somerton Apartments in Philadelphia,1 Bedroom,1,1,"Starting At $1,591",559,https://galmangroup.com/property/forest-station/,2026-09-21T20:45:22Z
+forest-station,Forest Station,Somerton Apartments in Philadelphia,2 Bedroom,2,1,"Starting At $1,425",728,https://galmangroup.com/property/forest-station/,2026-09-21T20:45:22Z
+forest-station,Forest Station,Somerton Apartments in Philadelphia,2 BedroomTownhouse,2,1.5,"Starting At $1,924",960,https://galmangroup.com/property/forest-station/,2026-09-21T20:45:22Z
+forest-station,Forest Station,Somerton Apartments in Philadelphia,3 BedroomTownhouse,3,2.5,Call for Availability,"1,238",https://galmangroup.com/property/forest-station/,2026-09-21T20:45:22Z
+gail-court-apartments,Gail Court Apartments,Apartments for Rent in Fox Chase,Studio | 1 Bath,N/A,1,Call for Availability,229,https://galmangroup.com/property/gail-court-apartments/,2026-09-21T20:45:24Z
+gail-court-apartments,Gail Court Apartments,Apartments for Rent in Fox Chase,1 Bed | 1 Bath,1,1,Call for Availability,550-578,https://galmangroup.com/property/gail-court-apartments/,2026-09-21T20:45:24Z
+gail-court-apartments,Gail Court Apartments,Apartments for Rent in Fox Chase,2 Bed | 1 Bath,2,1,"Starting at $1,415",796,https://galmangroup.com/property/gail-court-apartments/,2026-09-21T20:45:24Z
+hampton-gardens,Hampton Gardens,Apartments for Rent in Northeast Philadelphia,Studio | 1 Bath,0,1,"Starting at $1,268",390-459,https://galmangroup.com/property/hampton-gardens/,2026-09-21T20:45:28Z
+hampton-gardens,Hampton Gardens,Apartments for Rent in Northeast Philadelphia,2 Bed | 1 Bath,2,1,"Starting at $1,475",654-728,https://galmangroup.com/property/hampton-gardens/,2026-09-21T20:45:28Z
+hampton-gardens,Hampton Gardens,Apartments for Rent in Northeast Philadelphia,2 Bedroom Deluxe,2,1,"Starting at $1,970",728,https://galmangroup.com/property/hampton-gardens/,2026-09-21T20:45:28Z
+leverington-court,Leverington Court,Apartments for Rent in Roxborough,Studio,Studio,1,Call for Availability,437,https://galmangroup.com/property/leverington-court/,2026-09-21T20:45:37Z
+leverington-court,Leverington Court,Apartments for Rent in Roxborough,1 Bedroom,1,1,Call for Availability,760,https://galmangroup.com/property/leverington-court/,2026-09-21T20:45:37Z
+leverington-court,Leverington Court,Apartments for Rent in Roxborough,1 Bedroom/Den,1,1,Call for Availability,874,https://galmangroup.com/property/leverington-court/,2026-09-21T20:45:37Z
+leverington-court,Leverington Court,Apartments for Rent in Roxborough,2 Bedroom,2,1,"Starting at $1,835",817-893,https://galmangroup.com/property/leverington-court/,2026-09-21T20:45:37Z
+lions-gate-apartments,Lion’s Gate Apartments,"Apartments for Rent in Bustleton, ​Philadelphia",1 Bedroom,1,1,"Starting At $1,421",628,https://galmangroup.com/property/lions-gate-apartments/,2026-09-21T20:45:39Z
+lions-gate-apartments,Lion’s Gate Apartments,"Apartments for Rent in Bustleton, ​Philadelphia",2 Bedroom,2,2,"Starting At $1,826",817,https://galmangroup.com/property/lions-gate-apartments/,2026-09-21T20:45:39Z
+the-mccallum,The McCallum,"Apartments in Mount Airy, Philadelphia",Studio,Studio,1,"Starting at $1,176",432,https://galmangroup.com/property/the-mccallum/,2026-09-21T20:45:41Z
+the-mccallum,The McCallum,"Apartments in Mount Airy, Philadelphia",1 Bedroom*,1,1,"Starting at $1,473",647-864,https://galmangroup.com/property/the-mccallum/,2026-09-21T20:45:41Z
+the-mccallum,The McCallum,"Apartments in Mount Airy, Philadelphia",1 BedroomBi-Level,1,1,Call for Availability,817,https://galmangroup.com/property/the-mccallum/,2026-09-21T20:45:41Z
+the-mccallum,The McCallum,"Apartments in Mount Airy, Philadelphia",2 Bedroom,2,2,"Starting at $1,932","1,015-1,214",https://galmangroup.com/property/the-mccallum/,2026-09-21T20:45:41Z
+pine-manor,Pine Manor,Apartments in Fox Chase,1 Bedroom Jr,1,1,Call for Availability,449,https://galmangroup.com/property/pine-manor/,2026-09-21T20:44:49Z
+pine-manor,Pine Manor,Apartments in Fox Chase,1 Bedroom,1,1,"Starting At $1,457",580,https://galmangroup.com/property/pine-manor/,2026-09-21T20:44:49Z
+pine-manor,Pine Manor,Apartments in Fox Chase,2 Bedroom,2,1,"Starting At $1,835",761,https://galmangroup.com/property/pine-manor/,2026-09-21T20:44:49Z
+the-ridge-apartments,The Ridge Apartments,Roxborough Apartments in Philadelphia,1 Bedroom Jr,1,1,"Starting at $1,180",450,https://galmangroup.com/property/the-ridge-apartments/,2026-09-21T20:46:22Z
+the-ridge-apartments,The Ridge Apartments,Roxborough Apartments in Philadelphia,1 Bedroom,1,1,"Starting at $1,255",616,https://galmangroup.com/property/the-ridge-apartments/,2026-09-21T20:46:22Z
+the-ridge-apartments,The Ridge Apartments,Roxborough Apartments in Philadelphia,2 Bedroom 1 Bath,2,1,"Starting at $1,470",810,https://galmangroup.com/property/the-ridge-apartments/,2026-09-21T20:46:22Z
+the-ridge-apartments,The Ridge Apartments,Roxborough Apartments in Philadelphia,2 Bedroom 2 Bath,2,2,Call for Availability,817,https://galmangroup.com/property/the-ridge-apartments/,2026-09-21T20:46:22Z
+ridge-court,Ridge Court,Roxborough Apartments for Rent,1 Bedroom,1,1,"Starting at $1,345",598,https://galmangroup.com/property/ridge-court/,2026-09-21T20:46:26Z
+ridge-court,Ridge Court,Roxborough Apartments for Rent,2 Bedroom,2,1,"Starting at $1,625","798-1,040",https://galmangroup.com/property/ridge-court/,2026-09-21T20:46:26Z
+ridgeview-apartments,Ridgeview Apartments,Luxury Apartments in Roxborough,1 Bed | 1 Bath,1,1,"Starting at $1,310",651-690,https://galmangroup.com/property/ridgeview-apartments/,2026-09-21T20:46:28Z
+ridgeview-apartments,Ridgeview Apartments,Luxury Apartments in Roxborough,2 Bed | 1 Bath,2,1,"Starting From $1,761",900-950,https://galmangroup.com/property/ridgeview-apartments/,2026-09-21T20:46:28Z
+rock-hill-apartments,Rock Hill Apartments,"Apartments for Rent in Manayunk, PA",Studio,Studio,1,Call for Availability,571,https://galmangroup.com/property/rock-hill-apartments/,2026-09-21T20:46:30Z
+rock-hill-apartments,Rock Hill Apartments,"Apartments for Rent in Manayunk, PA",1 Bedroom,1,1,"Starting at $1,565",571-623,https://galmangroup.com/property/rock-hill-apartments/,2026-09-21T20:46:30Z
+rock-hill-apartments,Rock Hill Apartments,"Apartments for Rent in Manayunk, PA",2 Bedroom,2,1,"Starting at $1,664",832,https://galmangroup.com/property/rock-hill-apartments/,2026-09-21T20:46:30Z
+rock-hill-apartments,Rock Hill Apartments,"Apartments for Rent in Manayunk, PA",2 Bedroom,2,2,"Starting at $1,750",832,https://galmangroup.com/property/rock-hill-apartments/,2026-09-21T20:46:30Z
+sedgwick-station,Sedgwick Station,Apartments in Mount Airy Philadelphia,1 Bed | 1 Bath,1,1,"Starting At $1,510",606,https://galmangroup.com/property/sedgwick-station/,2026-09-21T20:46:32Z
+sedgwick-station,Sedgwick Station,Apartments in Mount Airy Philadelphia,2 Bed | 1 Bath,2,1,"Starting At $1,668",744,https://galmangroup.com/property/sedgwick-station/,2026-09-21T20:46:32Z
+stenton-plaza,Stenton Plaza,"Mt. Airy Apartments in Philadelphia, PA!",Studio,Studio,1,Call for Availability,305,https://galmangroup.com/property/stenton-plaza/,2026-09-21T20:46:41Z
+stenton-plaza,Stenton Plaza,"Mt. Airy Apartments in Philadelphia, PA!",1 Bedroom,1,1,"Starting At $1,314",585,https://galmangroup.com/property/stenton-plaza/,2026-09-21T20:46:41Z
+stenton-plaza,Stenton Plaza,"Mt. Airy Apartments in Philadelphia, PA!",2 Bedroom,2,1,Call for Availability,815,https://galmangroup.com/property/stenton-plaza/,2026-09-21T20:46:41Z
