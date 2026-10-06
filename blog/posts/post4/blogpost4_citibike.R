@@ -35,14 +35,15 @@ csv_members <- csv_members[grepl("\\.csv$", csv_members, ignore.case = TRUE)]
 if (length(csv_members) == 0) stop("The Citi Bike archive contains no CSV files.")
 
 read_trip_member <- function(member) {
-  con <- unz(archive_file, member, open = "r")
+  con <- unz(archive_file, member, open = "rb")
   on.exit(close(con))
   readr::read_csv(
     con,
     col_select = c(started_at, ended_at, member_casual),
+    locale = readr::locale(tz = "America/New_York"),
     col_types = readr::cols(
-      started_at = readr::col_datetime(format = "%Y-%m-%d %H:%M:%OS", tz = "America/New_York"),
-      ended_at = readr::col_datetime(format = "%Y-%m-%d %H:%M:%OS", tz = "America/New_York"),
+      started_at = readr::col_datetime(format = "%Y-%m-%d %H:%M:%OS"),
+      ended_at = readr::col_datetime(format = "%Y-%m-%d %H:%M:%OS"),
       member_casual = readr::col_character(),
       .default = readr::col_skip()
     ),

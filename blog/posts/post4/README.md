@@ -26,13 +26,22 @@ source("blogpost4_citibike.R")
 source("make_figures.R")
 ```
 
-Then open `BlogPost4.qmd` in RStudio and click **Render**, or run this in the RStudio Terminal from the `post4` folder:
+Then open `BlogPost4.qmd` in RStudio and click **Render**. The article uses the included derived CSV files and existing SVG figures, so rendering the website does not redownload the 352 MB raw archive. To regenerate the complete website, use **Build → Render Website** from the website project.
+
+To update the data and figures from the website project root, run:
+
+```r
+source("blog/posts/post4/blogpost4_citibike.R")
+source("blog/posts/post4/make_figures.R")
+```
+
+The data script downloads the official archive if it is not present. Afterward, render the post or the whole website. To render from the RStudio Terminal in the `post4` folder, run:
 
 ```sh
 quarto render BlogPost4.qmd
 ```
 
-The article sources both scripts when it renders, so its summary numbers and figures update with the derived data. If the January 2024 raw archive is not present, the analysis script downloads it automatically. The archive is approximately 352 MB, so the first run can take a few minutes.
+The article reads summary statistics from the committed derived tables and rebuilds figures from those tables. This keeps routine website builds quick and avoids network downloads. Run the data script explicitly when you want to refresh the data; it reads every CSV in the January archive and writes updated derived tables.
 
 ## Data and definitions
 

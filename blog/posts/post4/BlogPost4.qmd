@@ -25,9 +25,42 @@ execute:
 ```{r}
 #| label: prepare-data-and-figures
 #| include: false
-project_dir <- dirname(knitr::current_input(dir = TRUE))
-source(file.path(project_dir, "blogpost4_citibike.R"), local = knitr::knit_global())
-source(file.path(project_dir, "make_figures.R"), local = knitr::knit_global())
+post4_dir <- normalizePath(dirname(knitr::current_input(dir = TRUE)),
+                           winslash = "/", mustWork = TRUE)
+derived_dir <- file.path(post4_dir, "data", "derived")
+needed_tables <- c("summary_stats.csv", "hourly_by_day_type.csv",
+                   "weekday_hour_mean.csv", "duration_histogram.csv",
+                   "duration_median_bins.csv")
+missing_tables <- needed_tables[!file.exists(file.path(derived_dir, needed_tables))]
+if (length(missing_tables)) {
+  stop("Missing derived data: ", paste(missing_tables, collapse = ", "),
+       ". Rebuild them by running blogpost4_citibike.R from the post4 folder.")
+}
+
+summary_stats <- readr::read_csv(file.path(derived_dir, "summary_stats.csv"),
+                                 show_col_types = FALSE)
+hourly_by_day_type <- readr::read_csv(file.path(derived_dir, "hourly_by_day_type.csv"),
+                                      show_col_types = FALSE)
+duration_medians <- readr::read_csv(file.path(derived_dir, "duration_median_bins.csv"),
+                                    show_col_types = FALSE)
+valid_trips <- summary_stats$valid_trips[[1]]
+rows_omitted <- summary_stats$omitted_rows[[1]]
+mean_weekday <- summary_stats$mean_daily_rides_weekday[[1]]
+mean_weekend <- summary_stats$mean_daily_rides_weekend[[1]]
+weekday_lift_pct <- summary_stats$weekday_lift_percent[[1]]
+commute_vs_midday <- summary_stats$weekday_08_17_over_13_hourly[[1]]
+member_n <- duration_medians$total_rides[duration_medians$rider_type == "member"]
+casual_n <- duration_medians$total_rides[duration_medians$rider_type == "casual"]
+member_median <- duration_medians$approx_median_bin_center[duration_medians$rider_type == "member"]
+casual_median <- duration_medians$approx_median_bin_center[duration_medians$rider_type == "casual"]
+fmt_n <- function(x) format(round(x), big.mark = ",", scientific = FALSE)
+peak_hour <- function(type) {
+  hourly_by_day_type |>
+    dplyr::filter(day_type == type) |>
+    dplyr::slice_max(mean_rides_per_day, n = 1, with_ties = FALSE) |>
+    dplyr::pull(hour)
+}
+source(file.path(post4_dir, "make_figures.R"), local = knitr::knit_global())
 ```
 
 *How do New Yorkers use Citi Bike in the middle of winter? A look at every published January 2024 trip suggests two daily rhythms: a weekday rush-hour pulse and a later weekend peak. Annual members also tend to take shorter rides than casual riders.*
@@ -44,7 +77,7 @@ I use Citi Bike’s [official trip-history archive](https://citibikenyc.com/syst
 
 Trip starts are counted by the local timestamp in `started_at`. Monday through Friday are weekdays; Saturday and Sunday are weekends. Hourly figures are averaged over the number of calendar days in each group, making the 23 weekdays and 8 weekend days comparable. For trip length, I compare trips from 1 minute to less than 120 minutes using five-minute bins.
 
-The archive yielded **`r fmt_n(nrow(trips_valid))` valid January rides**. I omitted **`r fmt_n(rows_omitted)` rows** with invalid timestamps, nonpositive durations, out-of-month starts, or an unrecognized rider category. Citi Bike itself removes trips shorter than 60 seconds before publishing the files.
+The archive yielded **`r fmt_n(valid_trips)` valid January rides**. I omitted **`r fmt_n(rows_omitted)` rows** with invalid timestamps, nonpositive durations, out-of-month starts, or an unrecognized rider category. Citi Bike itself removes trips shorter than 60 seconds before publishing the files.
 
 ## The weekday commute pulse
 
