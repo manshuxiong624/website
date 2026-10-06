@@ -1,9 +1,6 @@
 ---
 title: "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal"
-subtitle: "A winter snapshot of weekday routines, weekend rides, and trip length"
-author: "Manshu Xiong"
 date: "2026-10-06"
-description: "A descriptive look at the weekday and weekend timing of New York City Citi Bike trips, plus trip duration by rider type."
 categories:
   - Data Visualization
   - Citi Bike
@@ -11,10 +8,7 @@ categories:
 format:
   html:
     toc: true
-    toc-depth: 2
-    toc-location: right
-    code-fold: true
-    code-summary: "Show analysis code"
+    code-copy: true
 execute:
   echo: false
   warning: false
