@@ -1,0 +1,2 @@
+month,valid_trips,omitted_rows,weekday_days,weekend_days,mean_daily_rides_weekday,mean_daily_rides_weekend,weekday_lift_percent,weekday_peak_hour,weekend_peak_hour,weekday_08_17_over_13_hourly
+2024-01,1887675,410,23,8,65757.4,46906.9,40.187,17,14,3.6

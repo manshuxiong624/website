@@ -1,0 +1,2 @@
+source_landing_page,source_archive,data_sharing_policy,archive_local_date,rows_read,valid_january_rows,rows_omitted,csv_members
+https://citibikenyc.com/system-data,https://s3.amazonaws.com/tripdata/202401-citibike-tripdata.zip,https://citibikenyc.com/data-sharing-policy,2026-10-06,1888085,1887675,410,202401-citibike-tripdata_2.csv; 202401-citibike-tripdata_1.csv

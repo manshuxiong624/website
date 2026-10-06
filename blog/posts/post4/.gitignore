@@ -1,0 +1,3 @@
+# Re-download from the official source with blogpost4_citibike.R
+/data/raw/*.zip
+/data/raw/*.csv
