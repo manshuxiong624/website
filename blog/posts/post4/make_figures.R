@@ -18,6 +18,12 @@ if (is.na(script_file)) {
 project_dir <- if (!is.na(script_file)) dirname(script_file) else getwd()
 derived_dir <- file.path(project_dir, "data", "derived")
 image_dir <- file.path(project_dir, "images")
+needed_tables <- c("hourly_by_day_type.csv", "weekday_hour_mean.csv", "duration_histogram.csv")
+missing_tables <- needed_tables[!file.exists(file.path(derived_dir, needed_tables))]
+if (length(missing_tables)) {
+  stop("Missing derived data: ", paste(missing_tables, collapse = ", "),
+       ". Run blogpost4_citibike.R first.", call. = FALSE)
+}
 dir.create(image_dir, recursive = TRUE, showWarnings = FALSE)
 
 hourly <- readr::read_csv(file.path(derived_dir, "hourly_by_day_type.csv"), show_col_types = FALSE)
@@ -26,11 +32,9 @@ duration <- readr::read_csv(file.path(derived_dir, "duration_histogram.csv"), sh
 weekday_order <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 weekday_hour$weekday <- factor(weekday_hour$weekday, levels = weekday_order)
 
-svg_device <- if (requireNamespace("svglite", quietly = TRUE)) {
-  svglite::svglite
-} else {
-  grDevices::svg
-}
+# Use R's built-in SVG device so figure generation has no optional device
+# package dependency.
+svg_device <- grDevices::svg
 
 plot_theme <- ggplot2::theme_minimal(base_size = 12) +
   ggplot2::theme(

@@ -21,6 +21,44 @@ execute:
 #| include: false
 post4_dir <- normalizePath(dirname(knitr::current_input(dir = TRUE)),
                            winslash = "/", mustWork = TRUE)
+# Use the locked Blog 4 library only after it has actually been restored. A
+# lockfile records package versions; it does not install those packages.
+renv_activate <- file.path(post4_dir, "renv", "activate.R")
+locked_packages <- c("readr", "dplyr", "ggplot2")
+renv_library_dirs <- Sys.glob(file.path(post4_dir, "renv", "library", "*", "*"))
+locked_library_ready <- length(renv_library_dirs) > 0L && all(vapply(
+  locked_packages,
+  function(package) any(file.exists(file.path(renv_library_dirs, package, "DESCRIPTION"))),
+  logical(1)
+))
+
+if (file.exists(renv_activate) && locked_library_ready) {
+  previous_renv_project <- Sys.getenv("RENV_PROJECT", unset = NA_character_)
+  Sys.setenv(RENV_PROJECT = post4_dir)
+  tryCatch(
+    source(renv_activate, local = knitr::knit_global()),
+    finally = {
+      if (is.na(previous_renv_project)) {
+        Sys.unsetenv("RENV_PROJECT")
+      } else {
+        Sys.setenv(RENV_PROJECT = previous_renv_project)
+      }
+    }
+  )
+}
+
+required_packages <- c("readr", "dplyr", "ggplot2")
+missing_packages <- required_packages[!vapply(
+  required_packages, requireNamespace, logical(1), quietly = TRUE
+)]
+if (length(missing_packages)) {
+  stop(
+    "Missing required R packages: ", paste(missing_packages, collapse = ", "),
+    ". From the website project root, run renv::restore(project = 'blog/posts/post4'), ",
+    "then render this article again.",
+    call. = FALSE
+  )
+}
 derived_dir <- file.path(post4_dir, "data", "derived")
 needed_tables <- c("summary_stats.csv", "hourly_by_day_type.csv",
                    "weekday_hour_mean.csv", "duration_histogram.csv",
