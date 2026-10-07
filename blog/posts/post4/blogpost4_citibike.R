@@ -1,7 +1,7 @@
 # Reproducible data acquisition and summaries for Citi Bike Blog Post 4.
-# Run from this folder, or source this file from BlogPost4.qmd.
+# Run from any working directory; data paths resolve relative to this script.
 
-required <- c("dplyr", "readr", "tidyr", "lubridate", "tibble")
+required <- c("dplyr", "readr", "tidyr", "lubridate", "tibble", "ggplot2", "knitr")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing)) {
   stop(paste0("Install missing packages first: install.packages(c(",
@@ -25,13 +25,41 @@ dir.create(derived_dir, recursive = TRUE, showWarnings = FALSE)
 
 archive_url <- "https://s3.amazonaws.com/tripdata/202401-citibike-tripdata.zip"
 archive_file <- file.path(raw_dir, "202401-citibike-tripdata.zip")
-if (!file.exists(archive_file)) {
-  options(timeout = max(3600, getOption("timeout")))
-  utils::download.file(archive_url, archive_file, mode = "wb", quiet = FALSE)
+archive_members <- function(path) {
+  tryCatch(
+    unzip(path, list = TRUE)$Name,
+    error = function(e) stop(
+      "Cannot read the Citi Bike ZIP archive at ", path, ". It may be incomplete or corrupt. ",
+      "Move the damaged file out of data/raw and rerun this script. Details: ",
+      conditionMessage(e), call. = FALSE
+    )
+  )
 }
 
-csv_members <- unzip(archive_file, list = TRUE)$Name
-csv_members <- csv_members[grepl("\\.csv$", csv_members, ignore.case = TRUE)]
+if (!file.exists(archive_file)) {
+  options(timeout = max(3600, getOption("timeout")))
+  partial_file <- tempfile(pattern = ".citibike-download-", tmpdir = raw_dir, fileext = ".zip.part")
+  tryCatch({
+    download_status <- utils::download.file(archive_url, partial_file, mode = "wb", quiet = FALSE)
+    if (!isTRUE(download_status == 0) || !file.exists(partial_file) || file.info(partial_file)$size == 0) {
+      stop("The archive download did not complete successfully.", call. = FALSE)
+    }
+    downloaded_members <- archive_members(partial_file)
+    if (!any(grepl("\\.csv$", downloaded_members, ignore.case = TRUE))) {
+      stop("The downloaded archive contains no CSV files.", call. = FALSE)
+    }
+    if (!file.rename(partial_file, archive_file)) {
+      stop("The archive downloaded, but could not be moved into data/raw.", call. = FALSE)
+    }
+  }, error = function(e) {
+    if (file.exists(partial_file)) unlink(partial_file)
+    stop("Could not acquire the January 2024 Citi Bike archive. Check your internet connection and try again. Details: ",
+         conditionMessage(e), call. = FALSE)
+  })
+}
+
+csv_members <- archive_members(archive_file)
+csv_members <- sort(csv_members[grepl("\\.csv$", csv_members, ignore.case = TRUE)])
 if (length(csv_members) == 0) stop("The Citi Bike archive contains no CSV files.")
 
 read_trip_member <- function(member) {
@@ -161,11 +189,20 @@ summary_stats <- tibble::tibble(
   weekday_08_17_over_13_hourly = commute_vs_midday
 )
 
+environment_packages <- c("dplyr", "readr", "tidyr", "lubridate", "tibble", "ggplot2", "knitr")
+package_versions <- vapply(environment_packages, function(pkg) {
+  as.character(utils::packageVersion(pkg))
+}, character(1))
+
 metadata <- tibble::tibble(
   source_landing_page = "https://citibikenyc.com/system-data",
   source_archive = archive_url,
   data_sharing_policy = "https://citibikenyc.com/data-sharing-policy",
   archive_local_date = as.character(as.Date(file.info(archive_file)$mtime)),
+  archive_md5 = unname(tools::md5sum(archive_file)),
+  r_version = as.character(getRversion()),
+  platform = R.version$platform,
+  package_versions = paste(names(package_versions), package_versions, sep = "=", collapse = "; "),
   rows_read = rows_read,
   valid_january_rows = nrow(trips_valid),
   rows_omitted = rows_omitted,
@@ -179,7 +216,8 @@ readr::write_csv(duration_histogram, file.path(derived_dir, "duration_histogram.
 readr::write_csv(duration_medians, file.path(derived_dir, "duration_median_bins.csv"))
 readr::write_csv(summary_stats, file.path(derived_dir, "summary_stats.csv"))
 readr::write_csv(metadata, file.path(derived_dir, "source_metadata.csv"))
+capture.output(utils::sessionInfo(), file = file.path(derived_dir, "session_info.txt"))
 
-message("Saved derived tables in: ", derived_dir)
+message("Saved derived tables and environment details in: ", derived_dir)
 message("Valid January trips: ", fmt_n(nrow(trips_valid)),
         " | excluded rows: ", fmt_n(rows_omitted))

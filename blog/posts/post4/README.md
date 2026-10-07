@@ -1,56 +1,65 @@
-# Blog Post 4 — Citi Bike
+# Blog Post 4: Citi Bike in January
 
-This folder follows the same layout as the earlier blog-post folders: the Quarto article, two R scripts, a `data/` directory, figures in `images/`, and this README.
+This folder contains the Quarto article and the complete analysis pipeline for a descriptive look at January 2024 Citi Bike trips. It compares weekday and weekend trip-start patterns and trip duration by rider type.
 
-## Folder contents
+## Reproduce the published post
 
-- `BlogPost4.qmd` — the finished blog article, formatted for a Quarto website with a right-side table of contents
-- `blogpost4_citibike.R` — downloads/reads the official trip archive and creates analysis tables
-- `make_figures.R` — rebuilds the three SVG figures from the derived tables
-- `data/raw/` — raw source archive downloads here on the first run; large source files are ignored by Git
-- `data/derived/` — processed ride tables and source metadata
-- `images/` — the three figures used by the article
+Use R 4.1 or newer and an RStudio installation with Quarto available. The derived CSV files and SVG figures are included in the repository. A normal website render uses those files; it does **not** download the large raw archive.
 
-## Run in RStudio / Quarto
+1. Open the website project in RStudio (the folder containing `_quarto.yml`).
+2. Install the required R packages once, if they are not already installed:
 
-Use R 4.1 or newer. Install these packages once if needed:
+   ```r
+   install.packages(c("dplyr", "readr", "tidyr", "lubridate", "tibble", "ggplot2", "knitr"))
+   ```
 
-```r
-install.packages(c("dplyr", "readr", "tidyr", "lubridate", "tibble", "ggplot2", "knitr"))
-```
+3. Open `blog/posts/post4/BlogPost4.qmd` and click **Render** to render only this article, or select **Build → Render Website** to rebuild the site into `docs/`.
 
-To rebuild the data and figures from the `post4` folder:
+The post reads the committed summary tables and regenerates its figures from the committed analysis tables. It stops with a clear message if any required derived table is missing.
 
-```r
-source("blogpost4_citibike.R")
-source("make_figures.R")
-```
+## Rebuild from Citi Bike's raw data
 
-Then open `BlogPost4.qmd` in RStudio and click **Render**. The article uses the included derived CSV files and existing SVG figures, so rendering the website does not redownload the 352 MB raw archive. To regenerate the complete website, use **Build → Render Website** from the website project.
-
-To update the data and figures from the website project root, run:
+Run these lines in the RStudio Console while the website project is open:
 
 ```r
 source("blog/posts/post4/blogpost4_citibike.R")
 source("blog/posts/post4/make_figures.R")
 ```
 
-The data script downloads the official archive if it is not present. Afterward, render the post or the whole website. To render from the RStudio Terminal in the `post4` folder, run:
+The analysis script downloads the January 2024 archive on its first run (approximately 352 MB), validates the ZIP before saving it, and reads every CSV member in sorted order. Later runs reuse the local archive at `blog/posts/post4/data/raw/202401-citibike-tripdata.zip`. It then overwrites the derived tables and writes source and environment details. The figure script recreates the three SVGs. Finally, render the post or website as described above.
 
-```sh
-quarto render BlogPost4.qmd
-```
+If the download is interrupted, its temporary file is discarded and the final ZIP is not replaced by a partial file. If an existing ZIP is corrupt, move it out of `data/raw/` and rerun the analysis script to download a fresh copy.
 
-The article reads summary statistics from the committed derived tables and rebuilds figures from those tables. This keeps routine website builds quick and avoids network downloads. Run the data script explicitly when you want to refresh the data; it reads every CSV in the January archive and writes updated derived tables.
+## Project files
 
-## Data and definitions
+- `BlogPost4.qmd` — article, using the saved summary tables and figures
+- `blogpost4_citibike.R` — downloads and processes the official trip archive
+- `make_figures.R` — creates the three figures from derived tables
+- `data/raw/` — local raw archive; intentionally excluded from Git
+- `data/derived/` — generated CSV summaries, source metadata, and R session details
+- `images/` — generated SVG figures used in the article
 
-- Official source page: <https://citibikenyc.com/system-data>
+Key outputs in `data/derived/`:
+
+- `daily_rides.csv` — daily ride counts and weekday/weekend labels
+- `hourly_by_day_type.csv` — mean rides per clock hour and day type
+- `weekday_hour_mean.csv` — mean rides per weekday and hour
+- `duration_histogram.csv` — five-minute duration-bin shares by rider type
+- `duration_median_bins.csv` — approximate median duration-bin centers
+- `summary_stats.csv` — values used in the article text
+- `source_metadata.csv` — source URL, row counts, and (after a full rebuild) archive checksum, R/platform, and direct package versions
+- `session_info.txt` — R version, platform, and loaded-package details; refreshed by a full data rebuild
+
+## Data, definitions, and checks
+
+- Source landing page: <https://citibikenyc.com/system-data>
 - January 2024 archive: <https://s3.amazonaws.com/tripdata/202401-citibike-tripdata.zip>
 - Data-sharing policy: <https://citibikenyc.com/data-sharing-policy>
-- Scope: records with trip start dates in January 2024
-- Day groups: Monday–Friday (`Weekday`), Saturday–Sunday (`Weekend`)
-- Timing averages: ride starts per actual calendar date in each group
-- Duration comparison: valid trips from 1 minute to less than 120 minutes; five-minute bins
+- Scope: trips starting in January 2024; timestamps interpreted in `America/New_York`
+- Day groups: Monday–Friday (`Weekday`) and Saturday–Sunday (`Weekend`)
+- Hourly averages: trip starts per calendar day in each group, so groups with different numbers of days are comparable
+- Duration sample: valid trips from 1 minute to less than 120 minutes, summarized in five-minute bins
 
-Citi Bike notes that its published data omit trips under 60 seconds and staff/test trips, and that busy months may be split across multiple CSV files. The script reads all CSV members in the month archive. The data-sharing policy allows use in noncommercial analyses and reports but restricts stand-alone dataset distribution. The raw archive is therefore downloaded locally by the script rather than included in this folder.
+For the committed January 2024 extract, the analysis produced **1,887,675 valid rides** and excluded **410 rows** for invalid or out-of-scope records. Compare these counts with `summary_stats.csv` and `source_metadata.csv` after a full rebuild. Each full data rebuild records the raw archive's MD5 checksum, the R version, platform, direct package versions, CSV members processed, and `session_info.txt`. The currently committed metadata predates the checksum fields; run the two scripts above to refresh it. Package versions are recorded for each rebuild, but this folder does not yet pin packages with a lockfile. No random seed is needed because the pipeline uses deterministic filtering, aggregation, and plotting.
+
+The raw archive is not committed because Citi Bike's data-sharing policy restricts redistribution of the source files. The code downloads it from the official source when needed; the derived summaries and scripts are included here so the analysis can be inspected and reproduced.
