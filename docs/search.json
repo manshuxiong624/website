@@ -1,0 +1,275 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Manshu Xiong",
+    "section": "",
+    "text": "Manshu Xiong\nUniversity of Pennsylvaina\nWelcome to my personal website.\n\nQuick Links"
+  },
+  {
+    "objectID": "bio.html",
+    "href": "bio.html",
+    "title": "About Me",
+    "section": "",
+    "text": "Write a short biography here.\nInclude:"
+  },
+  {
+    "objectID": "bio.html#education",
+    "href": "bio.html#education",
+    "title": "About Me",
+    "section": "Education",
+    "text": "Education\nMaster of Applied Economics and Data Science, University of Pennsylvania (expaceted 2027) Batelor of Science, University Name 2026"
+  },
+  {
+    "objectID": "bio.html#interests",
+    "href": "bio.html#interests",
+    "title": "About Me",
+    "section": "Interests",
+    "text": "Interests\n\nEconometrics\nMachine Learning\nData Analysis"
+  },
+  {
+    "objectID": "bio.html#contact",
+    "href": "bio.html#contact",
+    "title": "About Me",
+    "section": "Contact",
+    "text": "Contact"
+  },
+  {
+    "objectID": "bio.html#studentemail.edu",
+    "href": "bio.html#studentemail.edu",
+    "title": "About Me",
+    "section": "student@email.edu",
+    "text": "student@email.edu"
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "A Positive Test Is Not a Diagnosis\n\n\nWhy a 99% accurate test can still be wrong most of the time\n\n\n\n\n\n\n\n\nOct 8, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nRush hour or joyride? What 1.9 million January Citi Bike trips reveal\n\n\n\n\n\n\n\n\n\n\n\nOct 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment in the U.S.: Who Bore the COVID-19 Shock?\n\n\n\n\n\nA weighted analysis of unemployment by educational attainment using IPUMS CPS Basic Monthly data, 2015–2024.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Can $1,500 Rent in Philadelphia?\n\n\n\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html",
+    "href": "blog/posts/post3/BlogPost3.html",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "",
+    "text": "How unemployment differed by education before, during, and after the COVID-19 labor-market shock. Estimates use IPUMS CPS Basic Monthly data from 2015–2024 and the CPS final person weight."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#the-question",
+    "href": "blog/posts/post3/BlogPost3.html#the-question",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "The question",
+    "text": "The question\nThe COVID-19 recession disrupted the U.S. labor market quickly, but its consequences were not distributed evenly. Workers with different educational backgrounds are concentrated in different occupations and industries, and those differences can shape exposure to job loss. This post asks: How did unemployment vary by educational attainment before, during, and after the COVID-19 shock?\nI focus on adults ages 25–64 who were in the civilian labor force. This keeps the comparison centered on people who were employed or actively seeking work, rather than on full-time students or most retirees. The goal is descriptive: to show how unemployment patterns differed across education groups, not to estimate the causal effect of education itself."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#data-and-methods",
+    "href": "blog/posts/post3/BlogPost3.html#data-and-methods",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "Data and methods",
+    "text": "Data and methods\nI use IPUMS Current Population Survey (CPS) Basic Monthly samples from 2015 through 2024. The extract includes all twelve monthly samples in each year and the variables needed to identify age, employment status, educational attainment, and person weights.\nThe outcome is the unemployment rate:\n\\[\n\\text{Unemployment rate} =\n\\frac{\\text{weighted number unemployed}}\n{\\text{weighted civilian labor force}}.\n\\]\nI classify respondents into five education groups: less than high school, high school, some college or an associate degree, a bachelor’s degree, and a graduate degree. Every estimate uses WTFINL, IPUMS CPS’s final person-level weight for Basic Monthly data. This step is essential: it makes the estimates describe the U.S. population represented by the CPS rather than the raw respondents in the downloaded file.\nThe yearly values pool monthly interviews within each calendar year. They should therefore be read as weighted annual averages of monthly labor-market conditions."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#the-pandemic-widened-an-existing-education-gap",
+    "href": "blog/posts/post3/BlogPost3.html#the-pandemic-widened-an-existing-education-gap",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "The pandemic widened an existing education gap",
+    "text": "The pandemic widened an existing education gap\nBefore the pandemic, unemployment already followed a clear education gradient. In 2019, adults without a high-school credential had an unemployment rate of 5.5%, compared with 1.8% among adults with graduate degrees. The gap was visible throughout the pre-2020 period.\n\nThe COVID-19 shock magnified that difference. In 2020, unemployment rose to 11.7% among people without a high-school credential. For graduate-degree holders, it rose to 3.5%. Every group experienced a substantial increase, but the increase was largest among workers with less education."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#recovery-reduced-but-did-not-eliminate-the-gap",
+    "href": "blog/posts/post3/BlogPost3.html#recovery-reduced-but-did-not-eliminate-the-gap",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "Recovery reduced, but did not eliminate, the gap",
+    "text": "Recovery reduced, but did not eliminate, the gap\nBy 2024, unemployment had fallen sharply across all five groups. Yet the ordering remained unchanged. The rate was 6.3% for adults with less than a high-school education and 2.0% for adults with graduate degrees. The difference was much smaller than in 2020 but still economically meaningful.\nThis result does not mean education alone determined who lost work. Educational attainment is connected to occupation, industry, work experience, location, and many other factors. Still, it is a useful summary measure of unequal labor-market risk."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#age-patterns",
+    "href": "blog/posts/post3/BlogPost3.html#age-patterns",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "Age patterns",
+    "text": "Age patterns\nThe education gradient appeared at every stage of working life. Adults ages 25–34 generally had the highest unemployment rates, especially during 2020. However, less-educated workers also faced higher unemployment among prime-age adults (35–54) and older working-age adults (55–64).\n\nFor example, in 2020, unemployment among adults without a high-school credential exceeded 10% in each age group. The corresponding rate for graduate-degree holders was roughly 3% to 4%. Thus, age changed the overall level of unemployment, but it did not remove the education gradient."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#limitations-and-takeaway",
+    "href": "blog/posts/post3/BlogPost3.html#limitations-and-takeaway",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "Limitations and takeaway",
+    "text": "Limitations and takeaway\nThis analysis is descriptive. It does not control for occupation, industry, race and ethnicity, geography, or other characteristics that may also influence unemployment. It also pools monthly CPS observations into annual estimates, so it summarizes average labor-market conditions rather than tracking the same workers over time.\nThe main takeaway is clear: education did not make workers immune to the COVID-19 recession, but it was strongly associated with lower unemployment before, during, and after the shock. The pandemic amplified a pre-existing gap, and the recovery narrowed that gap without eliminating it."
+  },
+  {
+    "objectID": "blog/posts/post3/BlogPost3.html#data-sources-and-reproducible-code",
+    "href": "blog/posts/post3/BlogPost3.html#data-sources-and-reproducible-code",
+    "title": "Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?",
+    "section": "Data sources and reproducible code",
+    "text": "Data sources and reproducible code\nData source: IPUMS CPS Basic Monthly, 2015–2024. The analysis uses the WTFINL final Basic Monthly person weight, documented by IPUMS here. The accompanying R scripts import the CPS CSV, create the weighted summary tables, and generate all three figures."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html",
+    "href": "blog/posts/post1/index.html",
+    "title": "A Positive Test Is Not a Diagnosis",
+    "section": "",
+    "text": "Imagine receiving a text from a clinic: Your screening test is positive. The test is advertised as 99% accurate. It is natural to hear that number and think, “Then there is about a 99% chance that I have the disease.”\nThat conclusion can be dramatically wrong. When a condition is rare, a positive result from a very accurate test may still be more likely to be a false alarm than a true case. This is not a flaw in arithmetic; it is a consequence of ignoring the base rate: how common the condition was before anyone took the test.\nThis matters because screening decisions affect real people. A positive result can bring anxiety, expensive follow-up appointments, and sometimes harmful treatment. Understanding the base rate helps explain why doctors often order a second, more specific test before making a diagnosis."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#a-screening-program-for-10000-people",
+    "href": "blog/posts/post1/index.html#a-screening-program-for-10000-people",
+    "title": "A Positive Test Is Not a Diagnosis",
+    "section": "A screening program for 10,000 people",
+    "text": "A screening program for 10,000 people\nSuppose a disease affects 1 out of every 1,000 people. A hospital screens 10,000 people who do not yet have symptoms. The test catches 99% of people who truly have the disease, and it correctly clears 99% of people who do not. Those sound like excellent numbers.\nBefore testing, we would expect 10 people in this group to have the disease and 9,990 not to have it. The results would look like this:\n\n\n\nGroup\nNumber of people\nTest result\n\n\n\n\nHave the disease\n10\nAbout 10 test positive\n\n\nDo not have the disease\n9,990\nAbout 100 test positive by mistake\n\n\n\nThere are about 110 positive results in total, but only about 10 belong to people who actually have the disease. Therefore,\n\\[\nP(\\text{disease} \\mid \\text{positive}) \\approx \\frac{10}{110} \\approx 9\\%.\n\\]\nIn other words, after a positive result, the chance that a person truly has the disease is around 9%, not 99%."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#how-can-a-test-be-99-accurate-and-still-mislead-us",
+    "href": "blog/posts/post1/index.html#how-can-a-test-be-99-accurate-and-still-mislead-us",
+    "title": "A Positive Test Is Not a Diagnosis",
+    "section": "How can a test be 99% accurate and still mislead us?",
+    "text": "How can a test be 99% accurate and still mislead us?\nThe surprising part is that both statements can be true at once. “99% accurate” usually describes how the test behaves within two groups: people with the disease and people without it. But a patient wants a different question answered: “Given my positive result, which group am I likely to be in?”\nThe direction of the probability has changed.\nThe test has a 1% false-positive rate. One percent sounds tiny, but 1% of 9,990 healthy people is roughly 100 people. Since the disease is rare, those false positives outnumber the roughly 10 true positives.\nThis is why our intuition fails. We focus on the test result and the impressive accuracy number, while our brain quietly drops the much larger group of people who were unlikely to have the disease in the first place. Statisticians call this mistake base-rate neglect."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#the-same-test-can-mean-different-things-for-different-people",
+    "href": "blog/posts/post1/index.html#the-same-test-can-mean-different-things-for-different-people",
+    "title": "A Positive Test Is Not a Diagnosis",
+    "section": "The same test can mean different things for different people",
+    "text": "The same test can mean different things for different people\nNow imagine a doctor uses this same test for people who already have symptoms or a strong family history. Suppose 10% of this group has the disease before testing. Out of 10,000 people, 1,000 would truly have it. The test would identify about 990 of them, while producing about 90 false positives among the 9,000 people without the disease.\nNow a positive result corresponds to\n\\[\n\\frac{990}{990 + 90} \\approx 92\\%.\n\\]\nNothing about the laboratory test changed. What changed was the base rate: this new group was already more likely to have the disease. A result has meaning only when combined with information about the population being tested."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#why-this-is-an-economics-problem-too",
+    "href": "blog/posts/post1/index.html#why-this-is-an-economics-problem-too",
+    "title": "A Positive Test Is Not a Diagnosis",
+    "section": "Why this is an economics problem too",
+    "text": "Why this is an economics problem too\nScreening programs must balance benefits and costs. Testing a large low-risk population may catch some cases early, but it also creates many false alarms. Those alarms use clinical resources and impose emotional and financial costs on patients. A sensible policy asks more than whether a test is accurate. It asks who should be tested, what happens after a positive result, and whether the expected benefits justify the harms and costs.\nThe same logic appears outside medicine. Spam filters, fraud alerts, and airport security systems can all look highly accurate while sending many innocent cases for review when the event being detected is rare."
+  },
+  {
+    "objectID": "blog/posts/post1/index.html#the-takeaway",
+    "href": "blog/posts/post1/index.html#the-takeaway",
+    "title": "A Positive Test Is Not a Diagnosis",
+    "section": "The takeaway",
+    "text": "The takeaway\nA positive test is evidence, not a diagnosis. To interpret it, we need the test’s accuracy and the base rate of the condition in the relevant population. When rare events are involved, even a small false-positive rate can dominate the results. That is why good decisions require asking not only “How accurate is the test?” but also “Accurate for whom, and how common was the problem before testing?”"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download my resume here:"
+  },
+  {
+    "objectID": "resume.html#resume-pdf",
+    "href": "resume.html#resume-pdf",
+    "title": "Resume",
+    "section": "Resume PDF",
+    "text": "Resume PDF"
+  },
+  {
+    "objectID": "blog/posts/post2/index.html",
+    "href": "blog/posts/post2/index.html",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "",
+    "text": "A comparison of advertised one-bedroom floor plans from one property manager, collected September 21, 2026."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#the-question",
+    "href": "blog/posts/post2/index.html#the-question",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "The question",
+    "text": "The question\nFor someone searching for a Philadelphia apartment, a monthly budget is only the beginning. Two apartments with similar rents can offer very different amounts of space. This project asks: Within a sample of Galman Group properties, where should a renter with a $1,500 monthly base-rent budget start looking for a standard one-bedroom apartment? I compare advertised starting rents and space per dollar to build a practical shortlist."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#data-and-methods",
+    "href": "blog/posts/post2/index.html#data-and-methods",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "Data and methods",
+    "text": "Data and methods\nI collected data from the Galman Group’s Philadelphia directory and its linked property pages using R’s rvest package. The directory provided 21 Philadelphia property links; I excluded an unrelated promotional link for Jenkintown. I checked the published robots.txt, used sequential requests with two-second pauses, and accessed only public pages. read_html() retrieved the HTML, and html_table() extracted 59 floor-plan records. The project includes source URLs, collection timestamps, factual HTML table extracts, and code so the saved analysis can be reproduced without repeatedly requesting the website.\nTo make the comparison more consistent, I retained ordinary one-bedroom, one-bathroom layouts. I excluded 34 records with other bedroom counts, five junior, den, or bi-level layouts, and four remaining records without a numerical rent. The resulting sample contains 16 floor plans at 16 properties. Missing prices remain missing rather than becoming zero. I grouped properties using the locations named in their page headings; Northeast Philadelphia combines several neighborhoods. Each property receives equal weight, regardless of its number of apartments. The figures represent starting prices for advertised layouts, not confirmed vacancies or signed leases."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#which-areas-fit-the-budget",
+    "href": "blog/posts/post2/index.html#which-areas-fit-the-budget",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "Which areas fit the budget?",
+    "text": "Which areas fit the budget?\n\n\n\nAdvertised starting rent by property, with a $1,500 reference line.\n\n\nAmong the three areas with at least four comparable properties, Roxborough had the lowest median starting rent: $1,310. Its median was $163 below Mount Airy’s $1,473 and $178.50 below Northeast Philadelphia’s $1,488.50. Four of five Roxborough properties met the $1,500 base-rent threshold, compared with three of five in Mount Airy and two of four in Northeast Philadelphia. These fractions describe the sampled properties with published prices; they do not measure the share of all local apartments available within budget. Wynnefield and Manayunk each contributed only one observation, making broader comparisons especially uncertain.\n\n\n\n\n\n\n\n\n\nArea\nProperties with published rent\nMedian starting rent/month\nAt or below $1,500\n\n\n\n\nRoxborough\n5\n$1,310.00\n4 of 5 (80%)\n\n\nWynnefield\n1\n$1,399.00\n1 of 1 (100%)\n\n\nMount Airy\n5\n$1,473.00\n3 of 5 (60%)\n\n\nNortheast Philadelphia\n4\n$1,488.50\n2 of 4 (50%)\n\n\nManayunk\n1\n$1,565.00\n0 of 1 (0%)"
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#comparing-space-per-dollar",
+    "href": "blog/posts/post2/index.html#comparing-space-per-dollar",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "Comparing space per dollar",
+    "text": "Comparing space per dollar\nFloor-plan size changes the interpretation. Donna Court had the lowest starting rent, $1,249 for 561 square feet. The Ridge Apartments advertised $1,255 for 616 square feet: 55 additional square feet for just $6 more per month. Their advertised rent-to-area ratios were approximately $2.23 and $2.04 per square foot, respectively. For renters prioritizing space within budget, The Ridge therefore warrants an early inquiry. I calculated this ratio for 13 properties with a single stated area; three area ranges were excluded because their starting rents could not be matched to an exact size.\n\n\n\nAdvertised monthly base rent per square foot for the 13 properties with a single reported area.\n\n\nSpace efficiency alone can also mislead. Dupont Towers had the lowest calculated ratio, about $2.01 per square foot, but its $1,750 starting rent exceeded the budget. A useful search strategy therefore applies the budget constraint first, then compares space among the remaining options."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#limitations-and-takeaway",
+    "href": "blog/posts/post2/index.html#limitations-and-takeaway",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "Limitations and takeaway",
+    "text": "Limitations and takeaway\nThis is a small, nonrandom sample from one manager, with uneven geographic coverage. Building quality, utilities, fees, concessions, lease dates, and commuting costs are not standardized. Prices can change, and a posted starting price does not establish that a matching apartment is currently available. These limitations prevent a claim that Roxborough is Philadelphia’s cheapest neighborhood. The actionable takeaway is narrower: start by checking The Ridge and Donna Court in Roxborough, then request a quote for a specific available unit and compare total monthly costs before arranging tours."
+  },
+  {
+    "objectID": "blog/posts/post2/index.html#data-sources-and-reproducible-code",
+    "href": "blog/posts/post2/index.html#data-sources-and-reproducible-code",
+    "title": "What Can $1,500 Rent in Philadelphia?",
+    "section": "Data sources and reproducible code",
+    "text": "Data sources and reproducible code\nAll property URLs and collection timestamps are documented in the source list. The comparison dataset contains the 16 eligible floor plans, and the exclusion audit records the cleaning decisions. See the project instructions for how to reproduce the analysis from the saved HTML extracts.\nThe code below is displayed for reproducibility. Rendering this post uses the saved figures and does not request the apartment website again. From this post’s folder, run source(\"run.R\") in R to rebuild the analysis.\n\n\nPackage setup\n\n# Install into this project rather than modifying a system R library.\ndir.create('.R-library',showWarnings=FALSE)\n.libPaths(c(normalizePath('.R-library'),.libPaths()))\npackages &lt;- c('rvest','dplyr','readr','stringr','ggplot2','httr','commonmark','jsonlite')\nmissing &lt;- packages[!vapply(packages,requireNamespace,logical(1),quietly=TRUE)]\nif(length(missing)) install.packages(missing,repos='https://cloud.r-project.org',lib='.R-library')\n\n\n\nCollect and extract the rental data\n\n# Run from the project root. Default: reproduce from saved factual HTML extracts.\n# Rscript R/01_scrape.R --live requests a new snapshot from the public website.\nsuppressPackageStartupMessages({\n  library(rvest); library(dplyr); library(readr); library(stringr)\n})\ndir.create('data', showWarnings = FALSE)\ndir.create('data/snapshots', showWarnings = FALSE)\nbase_url &lt;- 'https://galmangroup.com'\nindex_url &lt;- paste0(base_url, '/philadelphia/')\nlive &lt;- '--live' %in% commandArgs(trailingOnly = TRUE)\n\nfetch_html &lt;- function(url) {\n  Sys.sleep(2) # Sequential requests; never bypass login, CAPTCHA or rate limits.\n  response &lt;- httr::GET(url, httr::timeout(45),\n    httr::user_agent('PhillyRentClassProject/1.0 (educational research; limited requests)'))\n  httr::stop_for_status(response) # Stop on errors, including 403 and 429.\n  rvest::read_html(httr::content(response, as = 'raw'))\n}\n\n# Preserve only factual table cells, a property name and its location heading.\n# No images, tracking scripts, contact forms or full marketing descriptions.\nmake_extract &lt;- function(doc, path) {\n  tables &lt;- html_elements(doc, 'table')\n  keep &lt;- vapply(html_table(tables, convert = FALSE), function(x)\n    all(c('Model', 'Beds', 'Baths', 'Rent', 'Sq Ft') %in% names(x)), logical(1))\n  if (sum(keep) != 1) stop('Expected exactly one rental table: ', path)\n  table &lt;- tables[[which(keep)]]\n  xml2::xml_remove(html_elements(table, 'img,script,style,a'))\n  html &lt;- paste0('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=\"utf-8\"&gt;&lt;/head&gt;&lt;body&gt;',\n    as.character(html_element(doc, 'h1')), as.character(html_element(doc, 'h2')),\n    as.character(table), '&lt;/body&gt;&lt;/html&gt;')\n  writeLines(html, path, useBytes = TRUE)\n}\n\nif (live) {\n  # The stored robots file was manually reviewed on the original collection date.\n  # If it changes, stop for a fresh review rather than assuming continuing access.\n  response &lt;- httr::GET(paste0(base_url, '/robots.txt'), httr::timeout(45))\n  httr::stop_for_status(response)\n  current &lt;- str_trim(httr::content(response, as = 'text', encoding = 'UTF-8'))\n  reviewed &lt;- str_trim(paste(readLines('data/robots-reviewed.txt', warn = FALSE), collapse='\\n'))\n  if (!identical(current, reviewed)) stop('robots.txt changed. Review current site rules before collecting again.')\n  index &lt;- fetch_html(index_url)\n  urls &lt;- unique(html_attr(html_elements(index, 'a'), 'href'))\n  urls &lt;- urls[!is.na(urls) & str_detect(urls, '^https://galmangroup.com/property/') &\n                 !str_detect(urls, '/the-flats-at-jenkintown/')]\n  if (!length(urls)) stop('No property links found: inspect the directory layout.')\n  # Includes property links present in the static directory, including Westfield.\n  # The promotional Jenkintown banner is outside Philadelphia and is excluded.\n  manifest &lt;- list()\n  for (i in seq_along(urls)) {\n    url &lt;- urls[i]\n    slug &lt;- str_remove(str_remove(url, fixed(paste0(base_url, '/property/'))), '/$')\n    doc &lt;- fetch_html(url)\n    file &lt;- paste0('data/snapshots/', slug, '.html')\n    make_extract(doc, file)\n    manifest[[i]] &lt;- tibble(slug = slug, url = url, snapshot_file = file,\n      retrieved_at_utc = format(Sys.time(), '%Y-%m-%dT%H:%M:%SZ', tz='UTC'))\n  }\n  write_csv(bind_rows(manifest), 'data/sources.csv')\n}\n\nmanifest &lt;- read_csv('data/sources.csv', show_col_types = FALSE)\nrows &lt;- vector('list', nrow(manifest))\nfor (i in seq_len(nrow(manifest))) {\n  doc &lt;- read_html(manifest$snapshot_file[i])\n  tab &lt;- html_table(doc, convert = FALSE)[[1]]\n  required &lt;- c('Model','Beds','Baths','Rent','Sq Ft')\n  if (!all(required %in% names(tab))) stop('Rental table schema changed.')\n  rows[[i]] &lt;- tibble(\n    slug = manifest$slug[i], property = html_text2(html_element(doc,'h1')),\n    location_heading = html_text2(html_element(doc,'h2')),\n    model_raw = str_squish(tab$Model), beds_raw = str_squish(tab$Beds),\n    baths_raw = str_squish(tab$Baths), rent_raw = str_squish(tab$Rent),\n    sqft_raw = str_squish(tab[['Sq Ft']]), source_url = manifest$url[i],\n    retrieved_at_utc = manifest$retrieved_at_utc[i])\n}\nraw &lt;- bind_rows(rows)\nif (anyDuplicated(raw[c('slug','model_raw','beds_raw','baths_raw')])) stop('Duplicate property/model rows require review.')\nwrite_csv(raw, 'data/floorplans_raw.csv')\nmessage('Parsed ', nrow(raw), ' floor-plan rows from ', nrow(manifest), ' property pages.')\n\n\n\nClean, compare, and plot\n\nsuppressPackageStartupMessages({\n  library(dplyr); library(readr); library(stringr); library(ggplot2)\n})\nbudget &lt;- 1500 # Illustrative monthly BASE-rent budget, not an all-in-cost ceiling.\ndir.create('figures', showWarnings=FALSE)\nraw &lt;- read_csv('data/floorplans_raw.csv', show_col_types=FALSE)\n\n# Do not coerce 'Call for Availability' to zero, or average an area range.\nget_numbers &lt;- function(x) str_extract_all(str_remove_all(x, ','), '[0-9]+(?:\\\\.[0-9]+)?')\nrent_numbers &lt;- get_numbers(raw$rent_raw)\nsize_numbers &lt;- get_numbers(raw$sqft_raw)\nfirst_number &lt;- function(x) if(length(x)) as.numeric(x[1]) else NA_real_\nlast_number &lt;- function(x) if(length(x)) as.numeric(tail(x,1)) else NA_real_\nclean &lt;- raw %&gt;% mutate(\n  beds = if_else(str_detect(str_to_lower(beds_raw), 'studio'), 0, suppressWarnings(as.numeric(beds_raw))),\n  baths = suppressWarnings(as.numeric(baths_raw)),\n  rent_start = vapply(rent_numbers, first_number, numeric(1)),\n  sqft_min = vapply(size_numbers, first_number, numeric(1)),\n  sqft_max = vapply(size_numbers, last_number, numeric(1)),\n  exact_area = lengths(size_numbers) == 1L,\n  special_layout = str_detect(str_to_lower(model_raw), 'jr|junior|den|bi.level|town'),\n  area = case_when(\n    str_detect(location_heading, regex('Roxborough',ignore_case=TRUE)) ~ 'Roxborough',\n    str_detect(location_heading, regex('Manayunk',ignore_case=TRUE)) ~ 'Manayunk',\n    str_detect(location_heading, regex('Mt\\\\.?\\\\s*Airy|Mount Airy',ignore_case=TRUE)) ~ 'Mount Airy',\n    str_detect(location_heading, regex('Wynnefield',ignore_case=TRUE)) ~ 'Wynnefield',\n    str_detect(location_heading, regex('Fox Chase|Somerton|Bustleton|Rhawnhurst|Northeast',ignore_case=TRUE)) ~ 'Northeast Philadelphia',\n    TRUE ~ NA_character_),\n  eligible_standard_1br = beds == 1 & baths == 1 & !special_layout,\n  exclusion_reason = case_when(\n    beds != 1 ~ 'Not one bedroom',\n    baths != 1 ~ 'Not one bathroom',\n    special_layout ~ 'Junior, den, bi-level or townhouse layout',\n    is.na(rent_start) ~ 'No published numerical rent',\n    TRUE ~ 'Included'),\n  monthly_rent_per_sqft = if_else(exact_area & !is.na(rent_start), rent_start/sqft_min, NA_real_),\n  within_base_budget = !is.na(rent_start) & rent_start &lt;= budget)\nif(anyNA(clean$area)) stop('Unmapped location headings: ', paste(unique(clean$location_heading[is.na(clean$area)]),collapse='; '))\nif(any(clean$rent_start &lt;= 0,na.rm=TRUE) || any(clean$sqft_min &lt;= 0,na.rm=TRUE)) stop('Nonpositive rent or size: inspect data.')\nif(any(clean$sqft_min &gt; clean$sqft_max,na.rm=TRUE)) stop('Area range is reversed.')\nwrite_csv(clean,'data/floorplans_clean.csv')\none &lt;- filter(clean, eligible_standard_1br, !is.na(rent_start))\nif(anyDuplicated(one$slug)) stop('Multiple standard one-bedroom models at one property: review weighting before comparing areas.')\nwrite_csv(one,'data/one_bedroom_comparison.csv')\nsummary &lt;- one %&gt;% group_by(area) %&gt;% summarise(\n  properties_with_published_rent=n(), median_starting_rent=median(rent_start),\n  minimum_starting_rent=min(rent_start), maximum_starting_rent=max(rent_start),\n  properties_at_or_below_budget=sum(within_base_budget),\n  share_at_or_below_budget=mean(within_base_budget), .groups='drop') %&gt;% arrange(median_starting_rent)\nwrite_csv(summary,'data/area_summary.csv')\naudit &lt;- clean %&gt;% count(exclusion_reason,name='floorplan_rows')\nwrite_csv(audit,'data/exclusions.csv')\n\ncolors &lt;- c('Roxborough'='#16766d','Mount Airy'='#bc682f','Northeast Philadelphia'='#516eaa','Wynnefield'='#84669c','Manayunk'='#747b45')\nbase_theme &lt;- theme_minimal(base_size=12,base_family='sans') + theme(\n  plot.title=element_text(face='bold',size=19), plot.subtitle=element_text(size=11,color='#4e5c64'),\n  panel.grid.minor=element_blank(), panel.grid.major.y=element_blank(),\n  plot.caption=element_text(hjust=0,size=9,color='#57636a'), legend.position='bottom',\n  plot.margin=margin(15,25,15,15),plot.background=element_rect(fill='white',color=NA))\nplot_data &lt;- one %&gt;% arrange(rent_start) %&gt;% mutate(property=factor(property,levels=property))\np1 &lt;- ggplot(plot_data,aes(rent_start,property,color=area)) +\n  geom_vline(xintercept=budget,linetype='dashed',color='#b8493c',linewidth=.7) +\n  geom_segment(aes(x=0,xend=rent_start,yend=property),linewidth=.8,alpha=.3) +\n  geom_point(size=3) + geom_text(aes(label=scales::dollar(rent_start,accuracy=1)),hjust=-.25,size=3.3,show.legend=FALSE) +\n  scale_color_manual(values=colors) + scale_x_continuous(labels=scales::label_dollar(),limits=c(0,max(one$rent_start)*1.17),expand=expansion(mult=c(0,.02))) +\n  labs(title='Which Philadelphia properties fit a $1,500 base-rent budget?',\n    subtitle='Published starting monthly rents for standard one-bedroom, one-bathroom layouts',\n    x='Starting base rent (USD / month)',y=NULL,color=NULL,\n    caption='Dashed line: $1,500. Galman Group pages, collected September 21, 2026.\\nOne observation per property; advertised floor plans, not counts of vacant apartments. Fees and availability vary.') + base_theme\n# The dates below follow the collected snapshot and change automatically on a refresh.\ncollection_date &lt;- substr(min(one$retrieved_at_utc),1,10)\np1 &lt;- p1 + labs(caption=paste0('Dashed line: $1,500. Galman Group pages, collected ',collection_date,'.\\nOne observation per property; advertised floor plans, not counts of vacant apartments. Fees and availability vary.'))\nggsave('figures/starting_rents.png',p1,width=10.8,height=max(6.5,.32*nrow(one)+2.5),dpi=180,bg='white')\n\nexact &lt;- one %&gt;% filter(exact_area) %&gt;% arrange(monthly_rent_per_sqft) %&gt;% mutate(property=factor(property,levels=property))\np2 &lt;- ggplot(exact,aes(monthly_rent_per_sqft,property,color=area)) +\n  geom_point(size=3) + geom_text(aes(label=sprintf('$%.2f',monthly_rent_per_sqft)),hjust=-.3,size=3.3,show.legend=FALSE) +\n  scale_color_manual(values=colors) + scale_x_continuous(labels=scales::label_dollar(),limits=c(0,max(exact$monthly_rent_per_sqft)*1.2)) +\n  labs(title='A lower rent does not always mean more space per dollar',\n    subtitle='Starting rent divided by the single floor-plan area reported on the page',\n    x='Starting base rent per square foot (USD / month)',y=NULL,color=NULL,\n    caption=paste0('Source: Galman Group, ',collection_date,'. Area ranges excluded; these are advertised ratios, not unit-specific quotes.')) + base_theme\nggsave('figures/rent_per_sqft.png',p2,width=10.8,height=max(6.5,.32*nrow(exact)+2.5),dpi=180,bg='white')\nwriteLines(capture.output(sessionInfo()),'data/sessionInfo.txt')\nprint(summary)\nprint(select(one,property,area,rent_start,sqft_raw,monthly_rent_per_sqft),n=40)\n\n\n\nRun the analysis\n\n# Run with the working directory set to this post2 folder.\nsource(\"setup.R\")\nsource(\"R/01_scrape.R\")\nsource(\"R/02_analyze.R\")\nmessage(\"Analysis rebuilt. Open index.qmd and click Render to build the Quarto post.\")"
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html",
+    "href": "blog/posts/post4/BlogPost4.html",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "",
+    "text": "How do New Yorkers use Citi Bike in the middle of winter? A look at every published January 2024 trip suggests two daily rhythms: a weekday rush-hour pulse and a later weekend peak. Annual members also tend to take shorter rides than casual riders."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#the-question",
+    "href": "blog/posts/post4/BlogPost4.html#the-question",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "The question",
+    "text": "The question\nA bike-share system can be a quick link in a commute or the start of a leisurely weekend ride. Do January Citi Bike trips look more like weekday transportation or weekend recreation, and do members and casual riders use the system in the same way?\nI examine all published Citi Bike trip records that began in January 2024. The goal is descriptive: compare when trips start and how long they last. The data do not record why an individual rides, so “commute-shaped” and “recreation-shaped” describe timing patterns, not the purpose of any specific trip."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#data-and-methods",
+    "href": "blog/posts/post4/BlogPost4.html#data-and-methods",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "Data and methods",
+    "text": "Data and methods\nI use Citi Bike’s official trip-history archive. The R script downloads the January 2024 ZIP from the published archive when it is not already in data/raw/, then reads every CSV inside it. The source says published records exclude staff/test trips and trips under 60 seconds. Months with more than one million rides can be split across CSV files, so I process every January file.\nTrip starts are counted by the local timestamp in started_at. Monday through Friday are weekdays; Saturday and Sunday are weekends. Hourly figures are averaged over the number of calendar days in each group, making the 23 weekdays and 8 weekend days comparable. For trip length, I compare trips from 1 minute to less than 120 minutes using five-minute bins.\nThe archive yielded 1,887,675 valid January rides. I omitted 410 rows with invalid timestamps, nonpositive durations, out-of-month starts, or an unrecognized rider category. Citi Bike itself removes trips shorter than 60 seconds before publishing the files."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#the-weekday-commute-pulse",
+    "href": "blog/posts/post4/BlogPost4.html#the-weekday-commute-pulse",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "The weekday commute pulse",
+    "text": "The weekday commute pulse\n\n\n\nAverage Citi Bike trip starts per hour on weekdays and weekends in January 2024\n\n\nFigure 1. Mean number of trip starts in each clock hour per weekday or weekend day.\nAcross the whole day, there were about 65,757 weekday rides per day, compared with 46,907 weekend rides per day—roughly 40% more on weekdays. Weekday starts peak at 17:00 and again in the late afternoon. At 8 a.m. and 5 p.m., the hourly averages together are about 3.6 times the 1 p.m. level.\nWeekends peak around 14:00, with activity building later and a broader midday-to-afternoon high. Same bikes, different schedule. This timing fits a commuting role on weekdays and more flexible weekend riding, while leaving each rider’s actual purpose unknown."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#two-different-weekly-clocks",
+    "href": "blog/posts/post4/BlogPost4.html#two-different-weekly-clocks",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "Two different weekly clocks",
+    "text": "Two different weekly clocks\n\n\n\nHeatmap of average Citi Bike trip starts by weekday and hour in January 2024\n\n\nFigure 2. Mean trip starts per calendar day for each weekday–hour cell. Darker teal means more trips; each weekday is averaged over its January dates.\nThe weekday-by-hour view makes the contrast easier to see. Monday through Friday have pronounced morning and late-afternoon bands. Saturday and Sunday are flatter, with their busiest stretch centered around midday and early afternoon. Averaging each weekday separately keeps the longer count of weekdays from overwhelming the weekend pattern."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#members-take-shorter-rides",
+    "href": "blog/posts/post4/BlogPost4.html#members-take-shorter-rides",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "Members take shorter rides",
+    "text": "Members take shorter rides\n\n\n\nTrip duration distribution for Citi Bike members and casual riders\n\n\nFigure 3. Share of rides by five-minute duration bin for trips lasting at least one minute and less than two hours. The sample includes 1,677,601 member rides and 206,711 casual rides.\nThe median five-minute bin is centered at about 7.5 minutes for members and 12.5 minutes for casual riders. These are approximate bin centers, not exact-minute medians. Casual riders are more represented in the longer-duration tail; members cluster more heavily among short trips.\nThat fits the idea that membership can support frequent, practical trips, while some casual rides are longer outings. Duration alone cannot tell us a rider’s purpose: a member can go sightseeing and a casual rider can commute."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#limitations-and-takeaway",
+    "href": "blog/posts/post4/BlogPost4.html#limitations-and-takeaway",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "Limitations and takeaway",
+    "text": "Limitations and takeaway\nThis is a one-month winter snapshot, not a full-year estimate. Weather, daylight, holidays, and January’s particular conditions may shape these patterns. The records do not reveal the purpose of a trip, and this analysis is descriptive rather than causal. The duration comparison excludes trips shorter than one minute, nonpositive durations, and trips lasting 120 minutes or more; five-minute bins make the median centers approximate.\nThe clearest takeaway is that Citi Bike has two daily rhythms in January: a weekday commute-shaped pulse and a later weekend peak. Members also tend to make shorter trips than casual riders. The data suggest that the system serves both practical movement and longer rides, but cannot tell us why any individual unlocked a bike. A useful next step would compare all twelve months and add weather and daylight as context."
+  },
+  {
+    "objectID": "blog/posts/post4/BlogPost4.html#data-sources-and-replication",
+    "href": "blog/posts/post4/BlogPost4.html#data-sources-and-replication",
+    "title": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal",
+    "section": "Data sources and replication",
+    "text": "Data sources and replication\n\nCiti Bike system data and trip-history downloads\nCiti Bike data-sharing policy\nJanuary 2024 archive\n\nThe original ZIP is downloaded to data/raw/ when needed. blogpost4_citibike.R acquires and summarizes the trips; make_figures.R rebuilds the three SVGs in images/. Both scripts save reproducible tables and source metadata to data/derived/. See README.md for the folder layout and run instructions.\nCiti Bike’s data-sharing policy permits use in noncommercial analyses and reports and restricts distribution as a stand-alone dataset. The folder includes derived tables and the code to reacquire the raw source; it does not redistribute the large raw archive."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
