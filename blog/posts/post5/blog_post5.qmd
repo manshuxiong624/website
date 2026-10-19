@@ -1,0 +1,103 @@
+---
+title: "Where Income Clusters Around Philadelphia"
+author: "Manshu Xiong"
+date: 2026-10-18
+categories: [GIS, Economics]
+format: html
+execute:
+  warning: false
+  message: false
+  echo: false
+---
+
+```{r}
+#| include: false
+required <- c("sf", "dplyr", "readr", "jsonlite", "ggplot2", "scales")
+missing <- required[!vapply(required, requireNamespace, logical(1), quietly = TRUE)]
+if (length(missing)) {
+  stop("Install these R packages first: ", paste(missing, collapse = ", "))
+}
+if (!file.exists("data/processed/philadelphia_metro_income.gpkg")) {
+  source("R/prepare_data.R")
+}
+region <- sf::st_read("data/processed/philadelphia_metro_income.gpkg", quiet = TRUE)
+region$short_name <- sub(",.*", "", region$county)
+region$label <- paste0(region$short_name, "\n$", round(region$income / 1000), "k")
+ranked <- region[order(region$income), ]
+low <- ranked[1, ]
+high <- ranked[nrow(ranked), ]
+ratio <- as.numeric(high$income / low$income)
+gap <- as.numeric(high$income - low$income)
+```
+
+## The pattern is regional, but it is not uniform
+
+Where are higher-income households concentrated around Philadelphia? A county-level map gives a first answer: household incomes tend to be higher in some outer suburban counties than in Philadelphia County, but the pattern is not a simple ring around the city. That matters for how we talk about regional opportunity. A metro average can hide sizable differences among places that share labor markets, roads, and transit connections.
+
+The map compares median household income across ten counties in the Philadelphia-Camden-Wilmington region: five in southeastern Pennsylvania, four in South Jersey, and New Castle County, Delaware. It uses the U.S. Census Bureau's 2024 American Community Survey (ACS) five-year estimates, table B19013. The values are inflation-adjusted 2024 dollars. The five-year estimates pool survey responses collected from 2020 through 2024, which improves geographic detail but means the map is not a one-year snapshot.
+
+```{r}
+#| fig-cap: "Median household income by county, 2020–2024 ACS 5-year estimates. County labels show rounded estimates in thousands of 2024 dollars."
+library(ggplot2)
+ggplot(region) +
+  geom_sf(aes(fill = income), color = "white", linewidth = 0.55) +
+  geom_sf_text(aes(label = label), size = 3.0, lineheight = 0.95, color = "#172554") +
+  scale_fill_viridis_c(
+    option = "C", labels = scales::label_dollar(scale = 1 / 1000, suffix = "k"),
+    name = "Median household\nincome"
+  ) +
+  labs(title = "Income varies across the Philadelphia region",
+       subtitle = "County estimates, ACS 2020–2024 five-year data",
+       caption = "Source: U.S. Census Bureau, ACS table B19013; 2024 TIGER/Line county boundaries.") +
+  coord_sf(datum = NA, expand = FALSE) +
+  theme_void(base_size = 12) +
+  theme(plot.title = element_text(face = "bold", size = 17, color = "#172554"),
+        plot.subtitle = element_text(color = "#475569"),
+        plot.caption = element_text(color = "#64748b", hjust = 0),
+        legend.position = "right")
+```
+
+The geographic contrast is substantial: the highest county estimate is `r high$county`, at `r scales::dollar(high$income, accuracy = 1)`, while the lowest is `r low$county`, at `r scales::dollar(low$income, accuracy = 1)`. The difference is about `r round(ratio, 1)` times, or roughly `r scales::dollar(gap, accuracy = 1000)`. These are county medians, so they describe the midpoint household within each county; they do not mean every household in the higher-income county is better off than every household in the lower-income county.
+
+## A closer look at the county estimates
+
+The ranking below adds the published ACS margins of error. These bars make clear both the spread in estimates and that each number is an estimate rather than an exact count. The margins are reported at the Census Bureau's 90% confidence level.
+
+```{r}
+#| fig-cap: "County median household income with published 90% margins of error."
+ranked_df <- as.data.frame(ranked)
+ranked_df$county_short <- factor(ranked_df$short_name, levels = ranked_df$short_name)
+ggplot(ranked_df, aes(x = income, y = county_short)) +
+  geom_segment(aes(x = pmax(0, income - income_moe_90),
+                   xend = income + income_moe_90,
+                   yend = county_short),
+               linewidth = 0.7, color = "#64748b") +
+  geom_segment(aes(x = pmax(0, income - income_moe_90),
+                   xend = pmax(0, income - income_moe_90),
+                   y = as.numeric(county_short) - 0.12,
+                   yend = as.numeric(county_short) + 0.12),
+               linewidth = 0.7, color = "#64748b") +
+  geom_segment(aes(x = income + income_moe_90, xend = income + income_moe_90,
+                   y = as.numeric(county_short) - 0.12,
+                   yend = as.numeric(county_short) + 0.12),
+               linewidth = 0.7, color = "#64748b") +
+  geom_point(color = "#0f766e", size = 3) +
+  scale_x_continuous(labels = scales::label_dollar(),
+                     expand = expansion(mult = c(0.02, 0.08))) +
+  labs(title = "Suburban counties span a wide income range",
+       x = "Median household income (2024 dollars)", y = NULL,
+       caption = "Whiskers are published ACS 90% margins of error.") +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(face = "bold", color = "#172554"),
+        panel.grid.minor = element_blank())
+```
+
+The map is useful because proximity alone does not determine the pattern. Counties around the same central city can differ, and cross-state geography adds another layer to a labor and housing market that people often discuss as one region. The map can help pose better follow-up questions: Are differences associated with housing costs, commuting access, household composition, or the location of high-paying jobs? This descriptive comparison cannot distinguish among those explanations. It also cannot show inequality within a county, where affluent and low-income neighborhoods may sit side by side.
+
+There are two other limits to keep in mind. First, the Census county median is a broad summary, not a causal measure of the effect of moving to a county. Second, the ACS margin of error measures sampling uncertainty, not every source of uncertainty or differences in cost of living. A higher nominal income may not translate into a higher standard of living once housing and transportation costs are considered.
+
+**Takeaway:** The Philadelphia area contains a clear county-level income gradient, with a large gap between the highest- and lowest-estimate counties, but it is a patchwork rather than a uniform city-to-suburb divide. The map is a useful starting point for targeting more detailed neighborhood, housing, and commute analysis—not a verdict about individual households or the causes of regional inequality.
+
+### Data and replication
+
+Income: U.S. Census Bureau, 2024 ACS five-year estimates, table B19013, downloaded through the Census API. Geography: 2024 TIGER/Line county shapefiles. The analysis joins data to boundaries using county FIPS GEOIDs. The companion `R/prepare_data.R` script saves the cleaned estimate table and joined geometry under `data/processed/` so the results can be regenerated from source data.
