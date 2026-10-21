@@ -1,4 +1,4 @@
-# Education and Unemployment: Who Bore the COVID-19 Labor-Market Shock?
+ # Education and Unemployment: Who Bore the COVID-19 Labor-Market Shock?
 
 Did education protect U.S. workers from unemployment during the COVID-19 recession, and did that protection persist after the labor market recovered? I use IPUMS Current Population Survey (CPS) Basic Monthly data from 2015 through 2024 to examine this question. The CPS is a monthly survey of the U.S. population. I restrict the analysis to adults ages 25--64 who are in the civilian labor force: people who were employed or unemployed and looking for work.
 
