@@ -1,5 +1,7 @@
 # Creates the three figures from the weighted CPS summary tables.
-results_dir <- "real_results"
+if (!exists("results_dir", inherits = FALSE)) {
+  results_dir <- "real_results"
+}
 figure_dir <- file.path(results_dir, "figures")
 dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -34,49 +36,58 @@ mtext("IPUMS CPS Basic Monthly, adults ages 25--64 in the civilian labor force; 
       side = 1, line = 3.1, cex = 0.72)
 dev.off()
 
-# Figure 2: three key years.
-comparison <- annual[annual$YEAR %in% c(2019, 2020, 2024), ]
-mat <- sapply(c(2019, 2020, 2024), function(y) {
-  comparison$unemployment_rate[comparison$YEAR == y]
-})
-rownames(mat) <- education_order
+# Figure 2: the size of the initial pandemic shock, rather than another
+# presentation of unemployment levels.
+pre_pandemic <- annual[annual$YEAR == 2019, c("education", "unemployment_rate")]
+shock_year <- annual[annual$YEAR == 2020, c("education", "unemployment_rate")]
+names(pre_pandemic)[2] <- "rate_2019"
+names(shock_year)[2] <- "rate_2020"
+pandemic_shock <- merge(pre_pandemic, shock_year, by = "education", sort = FALSE)
+pandemic_shock$increase_pp <- 100 * (pandemic_shock$rate_2020 - pandemic_shock$rate_2019)
+pandemic_shock <- pandemic_shock[match(education_order, pandemic_shock$education), ]
+write.csv(pandemic_shock,
+          file.path(results_dir, "pandemic_shock_by_education.csv"), row.names = FALSE)
+
 png(file.path(figure_dir, "figure_2_pandemic_comparison.png"),
     width = 2200, height = 1300, res = 220)
-par(mar = c(11, 5, 3.5, 1), family = "sans")
-bp <- barplot(t(mat), beside = TRUE, col = c("#7C8798", "#B44D4D", "#2E6F95"),
-              ylim = c(0, 0.14), ylab = "Unemployment rate", yaxt = "n",
-              names.arg = education_order, las = 2,
-              main = "The education gap widened during the COVID-19 shock")
-axis(2, at = seq(0, 0.14, 0.02), labels = paste0(seq(0, 14, 2), "%"), las = 1)
-text(bp, t(mat), labels = paste0(sprintf("%.1f", 100 * t(mat)), "%"), pos = 3, cex = 0.72)
-legend("topleft", legend = c("2019", "2020", "2024"),
-       fill = c("#7C8798", "#B44D4D", "#2E6F95"), bty = "n")
-mtext("IPUMS CPS Basic Monthly, ages 25--64; weighted using WTFINL.",
-      side = 1, line = 9.2, cex = 0.72)
+par(mar = c(8, 12, 3.5, 1), family = "sans")
+bp <- barplot(pandemic_shock$increase_pp, horiz = TRUE,
+              col = education_colors[match(pandemic_shock$education, education_order)],
+              xlim = c(0, 7), xlab = "Increase in unemployment rate (percentage points)",
+              names.arg = pandemic_shock$education, las = 1, xaxt = "n",
+              main = "The 2020 unemployment increase was largest for less-educated workers")
+axis(1, at = 0:7, labels = paste0(0:7, " pp"))
+text(pandemic_shock$increase_pp, bp,
+     labels = paste0(sprintf("%.1f", pandemic_shock$increase_pp), " pp"), pos = 4, cex = 0.9)
+mtext("Change from the 2019 annual average to the 2020 annual average; IPUMS CPS Basic Monthly, weighted using WTFINL.",
+      side = 1, line = 5.3, cex = 0.72)
 dev.off()
 
-# Figure 3: education gradient by age group.
+# Figure 3: 2024 composition of the labor force and unemployed population.
+# This asks a different question: which groups are over-represented among
+# unemployed workers relative to their share of the civilian labor force?
+latest <- annual[annual$YEAR == 2024, ]
+latest$labor_force_share <- latest$labor_force_population / sum(latest$labor_force_population)
+latest$unemployed_share <- latest$unemployed_weight / sum(latest$unemployed_weight)
+latest$share_gap_pp <- 100 * (latest$unemployed_share - latest$labor_force_share)
+latest <- latest[match(education_order, latest$education), ]
+write.csv(latest[, c("education", "labor_force_share", "unemployed_share", "share_gap_pp")],
+          file.path(results_dir, "labor_force_vs_unemployed_share_2024.csv"), row.names = FALSE)
+
 png(file.path(figure_dir, "figure_3_age_education_trends.png"),
-    width = 2500, height = 1200, res = 180)
-layout(matrix(c(1, 2, 3, 4, 4, 4), nrow = 2, byrow = TRUE), heights = c(4, 0.65))
-par(oma = c(0, 0, 3, 0), mar = c(4.5, 4.7, 3.2, 0.7), family = "sans")
-for (age in c("25--34", "35--54", "55--64")) {
-  d <- annual_age[annual_age$age_group == age, ]
-  plot(NA, xlim = c(2015, 2024), ylim = c(0, 0.15), xlab = "", ylab = "Unemployment rate",
-       xaxt = "n", yaxt = "n", main = paste("Ages", age))
-  axis(1, at = c(2015, 2017, 2019, 2020, 2022, 2024))
-  axis(2, at = seq(0, 0.14, 0.02), labels = paste0(seq(0, 14, 2), "%"), las = 1)
-  abline(v = 2020, lty = 2, col = "gray55")
-  for (i in seq_along(education_order)) {
-    x <- d[d$education == education_order[i], ]
-    lines(x$YEAR, x$unemployment_rate, type = "o", lwd = 2, pch = 16,
-          col = education_colors[i])
-  }
-}
-par(mar = c(0, 0, 0, 0))
-plot.new()
-legend("center", legend = education_order, col = education_colors,
-       lwd = 2, pch = 16, bty = "n", horiz = TRUE, cex = 0.9)
-mtext("Education was associated with lower unemployment at every age.",
-      side = 3, outer = TRUE, line = -1, cex = 1.3, font = 2)
+    width = 2200, height = 1300, res = 220)
+par(mar = c(8, 12, 3.5, 2), family = "sans")
+y <- seq_along(education_order)
+plot(NA, xlim = c(0, 0.32), ylim = c(0.5, 5.5), xlab = "Share of people in each group",
+     ylab = "", yaxt = "n", xaxt = "n",
+     main = "In 2024, less-educated workers were over-represented among the unemployed")
+axis(1, at = seq(0, 0.30, 0.05), labels = paste0(seq(0, 30, 5), "%"))
+axis(2, at = y, labels = education_order, las = 1)
+segments(latest$labor_force_share, y, latest$unemployed_share, y, lwd = 3, col = "gray65")
+points(latest$labor_force_share, y, pch = 16, cex = 1.7, col = "#3B7EA1")
+points(latest$unemployed_share, y, pch = 16, cex = 1.7, col = "#B44D4D")
+legend("bottomright", legend = c("Share of civilian labor force", "Share of unemployed workers"),
+       col = c("#3B7EA1", "#B44D4D"), pch = 16, bty = "n")
+mtext("Adults ages 25--64 in the civilian labor force; IPUMS CPS Basic Monthly, weighted using WTFINL.",
+      side = 1, line = 5.3, cex = 0.72)
 dev.off()

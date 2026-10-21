@@ -2,13 +2,40 @@
 # Reproducible analysis for the IPUMS CPS Basic Monthly extract (2015--2024).
 #
 # Put cps_00003.csv in data/ and run this script from the project folder.
+# This script uses only base R (R >= 4.1.0); no package installation is needed.
 
-data_path <- file.path("data", "cps_00003.csv")
-results_dir <- "real_results"
+# Resolve paths from the script's location when it is sourced, and otherwise
+# fall back to the active RStudio project directory.
+script_path <- tryCatch(sys.frame(1)$ofile, error = function(e) NULL)
+project_dir <- if (!is.null(script_path)) {
+  dirname(normalizePath(script_path))
+} else {
+  normalizePath(getwd())
+}
+
+data_path <- Sys.getenv(
+  "CPS_DATA_PATH",
+  unset = file.path(project_dir, "data", "cps_00003.csv")
+)
+results_dir <- file.path(project_dir, "real_results")
 dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
 
 if (!file.exists(data_path)) {
-  stop("Place cps_00003.csv in the project's data/ folder, then run again.")
+  stop(
+    "Missing input at ", data_path,
+    ". Place cps_00003.csv in data/, or set CPS_DATA_PATH to its full location."
+  )
+}
+
+required_variables <- c("YEAR", "AGE", "SEX", "EMPSTAT", "EDUC", "WTFINL")
+csv_header <- names(read.csv(data_path, nrows = 0, check.names = FALSE))
+missing_variables <- setdiff(required_variables, csv_header)
+if (length(missing_variables) > 0) {
+  stop(
+    "The CSV is missing required variable(s): ",
+    paste(missing_variables, collapse = ", "),
+    ". Re-download the IPUMS extract with these variables included."
+  )
 }
 
 # Read only the variables used in the analysis. The selected CSV has 13.7 million
@@ -28,6 +55,10 @@ cps <- read.csv(
   na.strings = "",
   check.names = FALSE
 )
+
+if (!identical(as.integer(sort(unique(cps$YEAR))), 2015:2024)) {
+  stop("Unexpected YEAR values. This project requires Basic Monthly CPS samples for 2015--2024.")
+}
 
 # IPUMS CPS EDUC codes in the 2015--2024 Basic Monthly samples.
 education_group <- function(x) {
@@ -63,6 +94,10 @@ analysis <- cps[
 ]
 analysis$unemployed_weight <- analysis$WTFINL * (analysis$EMPSTAT %in% c(21, 22))
 
+if (nrow(analysis) == 0) {
+  stop("The analytical sample is empty. Check AGE, EMPSTAT, EDUC, and WTFINL in the input extract.")
+}
+
 # Every rate uses WTFINL, IPUMS CPS's final person-level Basic Monthly weight.
 annual <- aggregate(
   cbind(labor_force_population = WTFINL, unemployed_weight) ~ YEAR + education,
@@ -96,5 +131,24 @@ write.csv(
   row.names = FALSE
 )
 
-source("make_figures.R")
+# Write an audit-friendly run record. It records exactly which source file and
+# R version generated the current tables and figures without copying raw data.
+input_info <- file.info(data_path)
+run_manifest <- c(
+  "Blog Post 3 CPS analysis run",
+  paste("Run time:", format(Sys.time(), tz = "UTC", usetz = TRUE)),
+  paste("R version:", R.version.string),
+  paste("Input file:", normalizePath(data_path)),
+  paste("Input bytes:", input_info$size),
+  paste("Input modified:", format(input_info$mtime, tz = "UTC", usetz = TRUE)),
+  paste("Input rows:", nrow(cps)),
+  paste("Analytical rows:", nrow(analysis)),
+  "Population: civilian labor-force participants ages 25--64",
+  "Weight: WTFINL (IPUMS CPS Final Basic Weight)",
+  "Unemployed EMPSTAT codes: 21 and 22",
+  "Education groups: less than high school, high school, some college/associate, bachelor's, graduate"
+)
+writeLines(run_manifest, file.path(results_dir, "analysis_manifest.txt"))
+capture.output(sessionInfo(), file = file.path(results_dir, "session_info.txt"))
 
+source(file.path(project_dir, "make_figures.R"), local = TRUE)

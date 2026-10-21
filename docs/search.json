@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Manshu Xiong",
-    "section": "",
-    "text": "Manshu Xiong\nUniversity of Pennsylvaina\nWelcome to my personal website.\n\nQuick Links"
-  },
-  {
     "objectID": "bio.html",
     "href": "bio.html",
     "title": "About Me",
@@ -46,7 +39,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Rush hour or joyride? What 1.9 million January Citi Bike trips reveal\n\n\n\n\n\n\n\n\n\n\n\nOct 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment in the U.S.: Who Bore the COVID-19 Shock?\n\n\n\n\n\nA weighted analysis of unemployment by educational attainment using IPUMS CPS Basic Monthly data, 2015–2024.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Can $1,500 Rent in Philadelphia?\n\n\n\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Positive Test Is Not a Diagnosis\n\n\nWhy a 99% accurate test can still be wrong most of the time\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Where Income Clusters Around Philadelphia\n\n\n\n\n\n\n\n\n\n\n\nOct 18, 2026\n\n\nManshu Xiong\n\n\n\n\n\n\n\n\n\n\n\n\nRush hour or joyride? What 1.9 million January Citi Bike trips reveal\n\n\n\n\n\n\n\n\n\n\n\nOct 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nEducation and Unemployment in the U.S.: Who Bore the COVID-19 Shock?\n\n\n\n\n\nA weighted analysis of unemployment by educational attainment using IPUMS CPS Basic Monthly data, 2015–2024.\n\n\n\n\n\nSep 28, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Can $1,500 Rent in Philadelphia?\n\n\n\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Positive Test Is Not a Diagnosis\n\n\nWhy a 99% accurate test can still be wrong most of the time\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post3/BlogPost3.html",
@@ -105,6 +98,48 @@
     "text": "Data sources and reproducible code\nData source: IPUMS CPS Basic Monthly, 2015–2024. The analysis uses the WTFINL final Basic Monthly person weight, documented by IPUMS here. The accompanying R scripts import the CPS CSV, create the weighted summary tables, and generate all three figures."
   },
   {
+    "objectID": "blog/posts/post5/blog_post5.html",
+    "href": "blog/posts/post5/blog_post5.html",
+    "title": "Where Income Clusters Around Philadelphia",
+    "section": "",
+    "text": "Where are higher-income households concentrated around Philadelphia? A county-level map gives a first answer: household incomes tend to be higher in some outer suburban counties than in Philadelphia County, but the pattern is not a simple ring around the city. That matters for how we talk about regional opportunity. A metro average can hide sizable differences among places that share labor markets, roads, and transit connections.\nThe map compares median household income across ten counties in the Philadelphia-Camden-Wilmington region: five in southeastern Pennsylvania, four in South Jersey, and New Castle County, Delaware. It uses the U.S. Census Bureau’s 2024 American Community Survey (ACS) five-year estimates, table B19013. The values are inflation-adjusted 2024 dollars. The five-year estimates pool survey responses collected from 2020 through 2024, which improves geographic detail but means the map is not a one-year snapshot.\n\n\n\n\n\nMedian household income by county, 2020–2024 ACS 5-year estimates. County labels show rounded estimates in thousands of 2024 dollars.\n\n\n\n\nThe geographic contrast is substantial: the highest county estimate is Chester County, Pennsylvania, at $127,208, while the lowest is Philadelphia County, Pennsylvania, at $61,953. The difference is about 2.1 times, or roughly $65,000. These are county medians, so they describe the midpoint household within each county; they do not mean every household in the higher-income county is better off than every household in the lower-income county."
+  },
+  {
+    "objectID": "blog/posts/post5/blog_post5.html#the-pattern-is-regional-but-it-is-not-uniform",
+    "href": "blog/posts/post5/blog_post5.html#the-pattern-is-regional-but-it-is-not-uniform",
+    "title": "Where Income Clusters Around Philadelphia",
+    "section": "",
+    "text": "Where are higher-income households concentrated around Philadelphia? A county-level map gives a first answer: household incomes tend to be higher in some outer suburban counties than in Philadelphia County, but the pattern is not a simple ring around the city. That matters for how we talk about regional opportunity. A metro average can hide sizable differences among places that share labor markets, roads, and transit connections.\nThe map compares median household income across ten counties in the Philadelphia-Camden-Wilmington region: five in southeastern Pennsylvania, four in South Jersey, and New Castle County, Delaware. It uses the U.S. Census Bureau’s 2024 American Community Survey (ACS) five-year estimates, table B19013. The values are inflation-adjusted 2024 dollars. The five-year estimates pool survey responses collected from 2020 through 2024, which improves geographic detail but means the map is not a one-year snapshot.\n\n\n\n\n\nMedian household income by county, 2020–2024 ACS 5-year estimates. County labels show rounded estimates in thousands of 2024 dollars.\n\n\n\n\nThe geographic contrast is substantial: the highest county estimate is Chester County, Pennsylvania, at $127,208, while the lowest is Philadelphia County, Pennsylvania, at $61,953. The difference is about 2.1 times, or roughly $65,000. These are county medians, so they describe the midpoint household within each county; they do not mean every household in the higher-income county is better off than every household in the lower-income county."
+  },
+  {
+    "objectID": "blog/posts/post5/blog_post5.html#a-closer-look-at-the-county-estimates",
+    "href": "blog/posts/post5/blog_post5.html#a-closer-look-at-the-county-estimates",
+    "title": "Where Income Clusters Around Philadelphia",
+    "section": "A closer look at the county estimates",
+    "text": "A closer look at the county estimates\nThe ranking below adds the published ACS margins of error. These bars make clear both the spread in estimates and that each number is an estimate rather than an exact count. The margins are reported at the Census Bureau’s 90% confidence level.\n\n\n\n\n\nCounty median household income with published 90% margins of error.\n\n\n\n\nThe map is useful because proximity alone does not determine the pattern. Counties around the same central city can differ, and cross-state geography adds another layer to a labor and housing market that people often discuss as one region. The map can help pose better follow-up questions: Are differences associated with housing costs, commuting access, household composition, or the location of high-paying jobs? This descriptive comparison cannot distinguish among those explanations. It also cannot show inequality within a county, where affluent and low-income neighborhoods may sit side by side.\nThere are two other limits to keep in mind. First, the Census county median is a broad summary, not a causal measure of the effect of moving to a county. Second, the ACS margin of error measures sampling uncertainty, not every source of uncertainty or differences in cost of living. A higher nominal income may not translate into a higher standard of living once housing and transportation costs are considered.\nTakeaway: The Philadelphia area contains a clear county-level income gradient, with a large gap between the highest- and lowest-estimate counties, but it is a patchwork rather than a uniform city-to-suburb divide. The map is a useful starting point for targeting more detailed neighborhood, housing, and commute analysis—not a verdict about individual households or the causes of regional inequality.\n\nData and replication\nIncome: U.S. Census Bureau, 2024 ACS five-year estimates, table B19013, downloaded through the Census API. Geography: 2024 TIGER/Line county shapefiles. The analysis joins data to boundaries using county FIPS GEOIDs. The companion R/prepare_data.R script saves the cleaned estimate table and joined geometry under data/processed/ so the results can be regenerated from source data."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Manshu Xiong",
+    "section": "",
+    "text": "Manshu Xiong\nUniversity of Pennsylvaina\nWelcome to my personal website.\n\nQuick Links"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download my resume here:"
+  },
+  {
+    "objectID": "resume.html#resume-pdf",
+    "href": "resume.html#resume-pdf",
+    "title": "Resume",
+    "section": "Resume PDF",
+    "text": "Resume PDF"
+  },
+  {
     "objectID": "blog/posts/post1/index.html",
     "href": "blog/posts/post1/index.html",
     "title": "A Positive Test Is Not a Diagnosis",
@@ -145,20 +180,6 @@
     "title": "A Positive Test Is Not a Diagnosis",
     "section": "The takeaway",
     "text": "The takeaway\nA positive test is evidence, not a diagnosis. To interpret it, we need the test’s accuracy and the base rate of the condition in the relevant population. When rare events are involved, even a small false-positive rate can dominate the results. That is why good decisions require asking not only “How accurate is the test?” but also “Accurate for whom, and how common was the problem before testing?”"
-  },
-  {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Resume",
-    "section": "",
-    "text": "Download my resume here:"
-  },
-  {
-    "objectID": "resume.html#resume-pdf",
-    "href": "resume.html#resume-pdf",
-    "title": "Resume",
-    "section": "Resume PDF",
-    "text": "Resume PDF"
   },
   {
     "objectID": "blog/posts/post2/index.html",
