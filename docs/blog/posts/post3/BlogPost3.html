@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-28">
-<meta name="description" content="A weighted analysis of unemployment by educational attainment using IPUMS CPS Basic Monthly data, 2015–2024.">
 
-<title>Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock? – Manshu Xiong</title>
+<title>blogpost3 – Manshu Xiong</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,40 +106,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -150,104 +154,67 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
-  <li><a href="#data-and-methods" id="toc-data-and-methods" class="nav-link" data-scroll-target="#data-and-methods">Data and methods</a></li>
-  <li><a href="#the-pandemic-widened-an-existing-education-gap" id="toc-the-pandemic-widened-an-existing-education-gap" class="nav-link" data-scroll-target="#the-pandemic-widened-an-existing-education-gap">The pandemic widened an existing education gap</a></li>
-  <li><a href="#recovery-reduced-but-did-not-eliminate-the-gap" id="toc-recovery-reduced-but-did-not-eliminate-the-gap" class="nav-link" data-scroll-target="#recovery-reduced-but-did-not-eliminate-the-gap">Recovery reduced, but did not eliminate, the gap</a></li>
-  <li><a href="#age-patterns" id="toc-age-patterns" class="nav-link" data-scroll-target="#age-patterns">Age patterns</a></li>
-  <li><a href="#limitations-and-takeaway" id="toc-limitations-and-takeaway" class="nav-link" data-scroll-target="#limitations-and-takeaway">Limitations and takeaway</a></li>
-  <li><a href="#data-sources-and-reproducible-code" id="toc-data-sources-and-reproducible-code" class="nav-link" data-scroll-target="#data-sources-and-reproducible-code">Data sources and reproducible code</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Education and Unemployment in the U.S.: Who Bore the COVID-19 Shock?</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">LABOR MARKET</div>
-    <div class="quarto-category">IPUMS CPS</div>
-  </div>
-  </div>
 
-<div>
-  <div class="description">
-    A weighted analysis of unemployment by educational attainment using IPUMS CPS Basic Monthly data, 2015–2024.
-  </div>
+
+
+<section id="education-and-unemployment-who-bore-the-covid-19-labor-market-shock" class="level1">
+<h1>Education and Unemployment: Who Bore the COVID-19 Labor-Market Shock?</h1>
+<p>Did education protect U.S. workers from unemployment during the COVID-19 recession, and did that protection persist after the labor market recovered? I use IPUMS Current Population Survey (CPS) Basic Monthly data from 2015 through 2024 to examine this question. The CPS is a monthly survey of the U.S. population. I restrict the analysis to adults ages 25–64 who are in the civilian labor force: people who were employed or unemployed and looking for work.</p>
+<p>The outcome is the unemployment rate, defined as the weighted number of unemployed people divided by the weighted civilian labor force. I classify educational attainment into five groups: less than high school, high school, some college or an associate degree, a bachelor’s degree, and a graduate degree. The extract contains all twelve Basic Monthly samples for each year. I pool the monthly interviews within each calendar year, so the results should be interpreted as weighted annual averages of monthly labor-market conditions, rather than as estimates from one annual interview.</p>
+<p>Every estimate uses the CPS final Basic Monthly person weight, <code>WTFINL</code>. This matters because a raw survey count would describe only the people interviewed. Applying the sampling weight produces estimates intended to represent the U.S. civilian population covered by the CPS. IPUMS specifies <code>WTFINL</code> as the appropriate person-level weight for Basic Monthly analyses.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Core calculation: unemployment / civilian labor force</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>analysis <span class="ot">&lt;-</span> cps[cps<span class="sc">$</span>AGE <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> cps<span class="sc">$</span>AGE <span class="sc">&lt;=</span> <span class="dv">64</span> <span class="sc">&amp;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                cps<span class="sc">$</span>EMPSTAT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">21</span>, <span class="dv">22</span>), ]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>analysis<span class="sc">$</span>unemployed_weight <span class="ot">&lt;-</span> analysis<span class="sc">$</span>WTFINL <span class="sc">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                              (analysis<span class="sc">$</span>EMPSTAT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">22</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>annual <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="fu">cbind</span>(<span class="at">labor_force_population =</span> WTFINL,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                          unemployed_weight) <span class="sc">~</span> YEAR <span class="sc">+</span> education,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> analysis, <span class="at">FUN =</span> sum)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>annual<span class="sc">$</span>unemployment_rate <span class="ot">&lt;-</span> annual<span class="sc">$</span>unemployed_weight <span class="sc">/</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                            annual<span class="sc">$</span>labor_force_population</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="long-run-pattern-unemployment-was-lower-at-higher-education-levels" class="level2">
+<h2 class="anchored" data-anchor-id="long-run-pattern-unemployment-was-lower-at-higher-education-levels">Long-run pattern: unemployment was lower at higher education levels</h2>
+<p>Even before the pandemic, unemployment was systematically higher among adults with less education. In 2019, the weighted unemployment rate was 5.5% for adults without a high-school credential, compared with 1.8% for adults with graduate degrees. Figure 1 shows that this difference did not emerge only during the pandemic. It was visible throughout the pre-2020 period.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="real_results/figures/figure_1_education_trends.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1. Weighted annual unemployment rates by education.</figcaption>
+</figure>
 </div>
-
-
-<div class="quarto-title-meta">
-
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 28, 2026</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p><em>How unemployment differed by education before, during, and after the COVID-19 labor-market shock. Estimates use IPUMS CPS Basic Monthly data from 2015–2024 and the CPS final person weight.</em></p>
-<section id="the-question" class="level2">
-<h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>The COVID-19 recession disrupted the U.S. labor market quickly, but its consequences were not distributed evenly. Workers with different educational backgrounds are concentrated in different occupations and industries, and those differences can shape exposure to job loss. This post asks: <strong>How did unemployment vary by educational attainment before, during, and after the COVID-19 shock?</strong></p>
-<p>I focus on adults ages 25–64 who were in the civilian labor force. This keeps the comparison centered on people who were employed or actively seeking work, rather than on full-time students or most retirees. The goal is descriptive: to show how unemployment patterns differed across education groups, not to estimate the causal effect of education itself.</p>
 </section>
-<section id="data-and-methods" class="level2">
-<h2 class="anchored" data-anchor-id="data-and-methods">Data and methods</h2>
-<p>I use <a href="https://cps.ipums.org/">IPUMS Current Population Survey (CPS)</a> <strong>Basic Monthly</strong> samples from 2015 through 2024. The extract includes all twelve monthly samples in each year and the variables needed to identify age, employment status, educational attainment, and person weights.</p>
-<p>The outcome is the unemployment rate:</p>
-<p><span class="math display">\[
-\text{Unemployment rate} =
-\frac{\text{weighted number unemployed}}
-{\text{weighted civilian labor force}}.
-\]</span></p>
-<p>I classify respondents into five education groups: less than high school, high school, some college or an associate degree, a bachelor’s degree, and a graduate degree. Every estimate uses <code>WTFINL</code>, IPUMS CPS’s final person-level weight for Basic Monthly data. This step is essential: it makes the estimates describe the U.S. population represented by the CPS rather than the raw respondents in the downloaded file.</p>
-<p>The yearly values pool monthly interviews within each calendar year. They should therefore be read as weighted annual averages of monthly labor-market conditions.</p>
+<section id="the-covid-19-shock-was-not-equally-large" class="level2">
+<h2 class="anchored" data-anchor-id="the-covid-19-shock-was-not-equally-large">The COVID-19 shock was not equally large</h2>
+<p>The COVID-19 shock made the gap much larger. Figure 2 changes the question from <em>who had the highest unemployment rate?</em> to <em>who experienced the largest increase?</em> From 2019 to 2020, the weighted unemployment rate rose by 6.2 percentage points for adults without a high-school credential, compared with 1.7 percentage points for graduate-degree holders. Every group experienced a substantial increase, but the initial shock was clearly more severe for workers with less education.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="real_results/figures/figure_2_pandemic_comparison.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2. Change in weighted unemployment rates from 2019 to 2020.</figcaption>
+</figure>
+</div>
+<p>By 2024, unemployment had fallen sharply across the distribution. However, recovery did not erase the gradient. The 2024 rate remained 6.3% for the less-than-high-school group, compared with 2.0% for graduate-degree holders. The difference was smaller than during the acute pandemic shock but still economically meaningful.</p>
 </section>
-<section id="the-pandemic-widened-an-existing-education-gap" class="level2">
-<h2 class="anchored" data-anchor-id="the-pandemic-widened-an-existing-education-gap">The pandemic widened an existing education gap</h2>
-<p>Before the pandemic, unemployment already followed a clear education gradient. In 2019, adults without a high-school credential had an unemployment rate of <strong>5.5%</strong>, compared with <strong>1.8%</strong> among adults with graduate degrees. The gap was visible throughout the pre-2020 period.</p>
-<p><img src="images/figure_1_education_trends.png" class="img-fluid" data-fig-cap="Weighted annual unemployment rates by educational attainment, adults ages 25--64 in the civilian labor force." alt="Line chart of weighted unemployment rates by education from 2015 to 2024, with a sharp rise in 2020 for all education groups."></p>
-<p>The COVID-19 shock magnified that difference. In 2020, unemployment rose to <strong>11.7%</strong> among people without a high-school credential. For graduate-degree holders, it rose to <strong>3.5%</strong>. Every group experienced a substantial increase, but the increase was largest among workers with less education.</p>
-<p><img src="images/figure_2_pandemic_comparison.png" class="img-fluid" data-fig-cap="The education gap widened during the COVID-19 shock." alt="Grouped bar chart comparing unemployment in 2019, 2020, and 2024 across five education groups."></p>
+<section id="who-was-over-represented-among-unemployed-workers-in-2024" class="level2">
+<h2 class="anchored" data-anchor-id="who-was-over-represented-among-unemployed-workers-in-2024">Who was over-represented among unemployed workers in 2024?</h2>
+<p>The third figure provides a different population-level perspective. It compares each education group’s share of the 2024 civilian labor force with its share of all unemployed workers. A group appearing farther right in red than in blue is over-represented among unemployed workers. Adults without a high-school credential made up a noticeably larger share of the unemployed population than of the labor force. In contrast, adults with bachelor’s or graduate degrees accounted for smaller shares of unemployed workers than of the labor force. This composition comparison reinforces the rate evidence without merely repeating it: the education gap affected the make-up of unemployment as well as each group’s risk of unemployment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="real_results/figures/figure_3_age_education_trends.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3. 2024 shares of the civilian labor force and unemployed workers by education.</figcaption>
+</figure>
+</div>
 </section>
-<section id="recovery-reduced-but-did-not-eliminate-the-gap" class="level2">
-<h2 class="anchored" data-anchor-id="recovery-reduced-but-did-not-eliminate-the-gap">Recovery reduced, but did not eliminate, the gap</h2>
-<p>By 2024, unemployment had fallen sharply across all five groups. Yet the ordering remained unchanged. The rate was <strong>6.3%</strong> for adults with less than a high-school education and <strong>2.0%</strong> for adults with graduate degrees. The difference was much smaller than in 2020 but still economically meaningful.</p>
-<p>This result does not mean education alone determined who lost work. Educational attainment is connected to occupation, industry, work experience, location, and many other factors. Still, it is a useful summary measure of unequal labor-market risk.</p>
-</section>
-<section id="age-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="age-patterns">Age patterns</h2>
-<p>The education gradient appeared at every stage of working life. Adults ages 25–34 generally had the highest unemployment rates, especially during 2020. However, less-educated workers also faced higher unemployment among prime-age adults (35–54) and older working-age adults (55–64).</p>
-<p><img src="images/figure_3_age_education_trends.png" class="img-fluid" data-fig-cap="Education was associated with lower unemployment across all three age groups." alt="Three line charts showing unemployment by education for ages 25--34, 35--54, and 55--64."></p>
-<p>For example, in 2020, unemployment among adults without a high-school credential exceeded 10% in each age group. The corresponding rate for graduate-degree holders was roughly 3% to 4%. Thus, age changed the overall level of unemployment, but it did not remove the education gradient.</p>
-</section>
-<section id="limitations-and-takeaway" class="level2">
-<h2 class="anchored" data-anchor-id="limitations-and-takeaway">Limitations and takeaway</h2>
-<p>This analysis is descriptive. It does not control for occupation, industry, race and ethnicity, geography, or other characteristics that may also influence unemployment. It also pools monthly CPS observations into annual estimates, so it summarizes average labor-market conditions rather than tracking the same workers over time.</p>
-<p>The main takeaway is clear: education did not make workers immune to the COVID-19 recession, but it was strongly associated with lower unemployment before, during, and after the shock. The pandemic amplified a pre-existing gap, and the recovery narrowed that gap without eliminating it.</p>
-</section>
-<section id="data-sources-and-reproducible-code" class="level2">
-<h2 class="anchored" data-anchor-id="data-sources-and-reproducible-code">Data sources and reproducible code</h2>
-<p>Data source: <a href="https://cps.ipums.org/">IPUMS CPS Basic Monthly</a>, 2015–2024. The analysis uses the <code>WTFINL</code> final Basic Monthly person weight, documented by IPUMS <a href="https://cps.ipums.org/cps-action/variables/WTFINL">here</a>. The accompanying R scripts import the CPS CSV, create the weighted summary tables, and generate all three figures.</p>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
+<p>Education did not make workers immune to the COVID-19 recession, but it was strongly associated with lower unemployment before, during, and after it. The pandemic amplified a pre-existing gap, and the recovery narrowed that gap without eliminating it. These findings are descriptive, not causal: education is connected to occupation, industry, work experience, and other factors that also affect job loss. Yet the weighted CPS evidence clearly identifies workers with less formal education as the group facing the greatest unemployment risk during this period.</p>
+<p><strong>Data and reproducibility.</strong> The data are from <a href="https://cps.ipums.org/">IPUMS CPS</a>, Basic Monthly samples, 2015–2024. The accompanying <code>blogpost3_cps_csv.R</code> script imports the extract, applies <code>WTFINL</code>, creates the summary tables, and calls <code>make_figures.R</code> to reproduce all figures. IPUMS documents the Basic Monthly weight <a href="https://cps.ipums.org/cps-action/variables/WTFINL">here</a>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
