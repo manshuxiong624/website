@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#222}.small{font-size:13px}.axis{stroke:#555;stroke-width:1}.grid{stroke:#ddd;stroke-width:1}</style>
+<text x="450" y="35" font-size="21" text-anchor="middle">Early-career income understates persistence</text>
+<line class="grid" x1="100" y1="415.0" x2="830" y2="415.0"/>
+<text class="small" x="88" y="419.0" text-anchor="end">0.0</text>
+<line class="grid" x1="100" y1="360.0" x2="830" y2="360.0"/>
+<text class="small" x="88" y="364.0" text-anchor="end">0.1</text>
+<line class="grid" x1="100" y1="305.0" x2="830" y2="305.0"/>
+<text class="small" x="88" y="309.0" text-anchor="end">0.2</text>
+<line class="grid" x1="100" y1="250.0" x2="830" y2="250.0"/>
+<text class="small" x="88" y="254.0" text-anchor="end">0.3</text>
+<line class="grid" x1="100" y1="195.0" x2="830" y2="195.0"/>
+<text class="small" x="88" y="199.0" text-anchor="end">0.4</text>
+<line class="grid" x1="100" y1="140.0" x2="830" y2="140.0"/>
+<text class="small" x="88" y="144.0" text-anchor="end">0.5</text>
+<line class="grid" x1="100" y1="85.0" x2="830" y2="85.0"/>
+<text class="small" x="88" y="89.0" text-anchor="end">0.6</text>
+<line x1="100" y1="195.0" x2="830" y2="195.0" stroke="#222" stroke-dasharray="7,5" stroke-width="2"/>
+<text class="small" x="826" y="187.0" text-anchor="end">True simulated IGE = 0.40</text>
+<rect x="140" y="399.5" width="115" height="15.5" fill="#c44e52"/>
+<text x="197.5" y="390.5" text-anchor="middle" font-size="14">0.03</text>
+<text class="small" x="197.5" y="437" text-anchor="middle">Both age 25</text>
+<text class="small" x="197.5" y="454" text-anchor="middle">(single year)</text>
+<rect x="317" y="350.8" width="115" height="64.2" fill="#dd8452"/>
+<text x="374.5" y="341.8" text-anchor="middle" font-size="14">0.12</text>
+<text class="small" x="374.5" y="437" text-anchor="middle">Both age 30</text>
+<text class="small" x="374.5" y="454" text-anchor="middle">(single year)</text>
+<rect x="494" y="291.6" width="115" height="123.4" fill="#4c72b0"/>
+<text x="551.5" y="282.6" text-anchor="middle" font-size="14">0.22</text>
+<text class="small" x="551.5" y="437" text-anchor="middle">Both age 35</text>
+<text class="small" x="551.5" y="454" text-anchor="middle">(single year)</text>
+<rect x="671" y="231.2" width="115" height="183.8" fill="#55a868"/>
+<text x="728.5" y="222.2" text-anchor="middle" font-size="14">0.33</text>
+<text class="small" x="728.5" y="437" text-anchor="middle">Ages 35–39</text>
+<text class="small" x="728.5" y="454" text-anchor="middle">(five-year mean)</text>
+<line class="axis" x1="100" y1="415" x2="830" y2="415"/>
+<line class="axis" x1="100" y1="85" x2="100" y2="415"/>
+<text x="25" y="250.0" transform="rotate(-90 25 250.0)" text-anchor="middle" font-size="15">Estimated intergenerational elasticity</text>
+</svg>
