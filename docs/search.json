@@ -39,7 +39,7 @@
     "href": "blog/index.html",
     "title": "Blog",
     "section": "",
-    "text": "Matching Parents and Children with SQL in Python\n\n\n\n\n\n\n\n\n\n\n\nOct 21, 2026\n\n\nManshu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Income Clusters Around Philadelphia\n\n\n\n\n\n\n\n\n\n\n\nOct 18, 2026\n\n\nManshu Xiong\n\n\n\n\n\n\n\n\n\n\n\n\nRush hour or joyride? What 1.9 million January Citi Bike trips reveal\n\n\n\n\n\n\n\n\n\n\n\nOct 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Can $1,500 Rent in Philadelphia?\n\n\n\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Positive Test Is Not a Diagnosis\n\n\nWhy a 99% accurate test can still be wrong most of the time\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Does Higher Income Mean Longer Lives?\n\n\nWhat country-level data show from 1952 to 2007\n\n\n\n\n\n\n\n\nOct 26, 2026\n\n\nManshu\n\n\n\n\n\n\n\n\n\n\n\n\nMatching Parents and Children with SQL in Python\n\n\n\n\n\n\n\n\n\n\n\nOct 21, 2026\n\n\nManshu\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Income Clusters Around Philadelphia\n\n\n\n\n\n\n\n\n\n\n\nOct 18, 2026\n\n\nManshu Xiong\n\n\n\n\n\n\n\n\n\n\n\n\nRush hour or joyride? What 1.9 million January Citi Bike trips reveal\n\n\n\n\n\n\n\n\n\n\n\nOct 6, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Can $1,500 Rent in Philadelphia?\n\n\n\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nA Positive Test Is Not a Diagnosis\n\n\nWhy a 99% accurate test can still be wrong most of the time\n\n\n\n\n\n\n\n\nSep 14, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/posts/post3/BlogPost3.html",
@@ -355,5 +355,54 @@
     "title": "Matching Parents and Children with SQL in Python",
     "section": "4 Takeaway and limits",
     "text": "4 Takeaway and limits\nSQL makes a complicated longitudinal match auditable: identify people, summarize each generation with GROUP BY, and join the summaries on a documented family link. Measuring income in one year can confound permanent economic status with temporary earnings shocks. In this example, averaging several years produces an estimate closer to the known long-run relationship.\nThese numerical findings illustrate a mechanism in simulated data; they are not an empirical estimate for the United States. With survey data, researchers must verify identifier definitions, sample restrictions, age windows, inflation adjustments, and survey weights. The complete code, generated inputs, query, and output files are included in the accompanying project folder."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html",
+    "href": "blog/posts/post7/blogpost7.html",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "",
+    "text": "When people compare living standards across countries, they often look at income. But income alone does not tell us whether people live longer or whether the link between economic resources and health has changed over time. This post asks: How are GDP per capita and life expectancy related across countries, and how does that pattern change across historical snapshots?\nThe question is useful because it connects an economic measure to a human outcome. Looking at countries and years interactively can reveal differences that a single average hides. These charts are descriptive: they show which measures move together, but cannot establish that higher income causes longer lives."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html#why-look-at-income-and-life-expectancy",
+    "href": "blog/posts/post7/blogpost7.html#why-look-at-income-and-life-expectancy",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "",
+    "text": "When people compare living standards across countries, they often look at income. But income alone does not tell us whether people live longer or whether the link between economic resources and health has changed over time. This post asks: How are GDP per capita and life expectancy related across countries, and how does that pattern change across historical snapshots?\nThe question is useful because it connects an economic measure to a human outcome. Looking at countries and years interactively can reveal differences that a single average hides. These charts are descriptive: they show which measures move together, but cannot establish that higher income causes longer lives."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html#data",
+    "href": "blog/posts/post7/blogpost7.html#data",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "Data",
+    "text": "Data\nThe analysis uses the gapminder dataset included in the R package gapminder. It contains 1,704 country-year observations for 142 countries, with 12 observation years spaced five years apart from 1952 to 2007. gdpPercap is GDP per capita in the dataset’s reported units, lifeExp is life expectancy in years, and pop is population. The dataset is included in the R package, so the analysis does not rely on a live API or a separately hosted CSV.\nThe first figure uses a logarithmic GDP axis so lower-income countries remain visible alongside much richer countries. Each point is a country; population determines its size and continent determines its color. Use the year slider or play button, and hover over points to identify countries and values."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html#income-and-life-expectancy-over-time",
+    "href": "blog/posts/post7/blogpost7.html#income-and-life-expectancy-over-time",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "1. Income and life expectancy over time",
+    "text": "1. Income and life expectancy over time\n\n\nCode\nincome_health &lt;- plot_ly(\n  data = gm,\n  x = ~gdpPercap, y = ~lifeExp,\n  size = ~pop, color = ~continent,\n  frame = ~year, ids = ~country,\n  text = ~paste0(\n    \"&lt;b&gt;\", country, \"&lt;/b&gt;&lt;br&gt;Continent: \", continent,\n    \"&lt;br&gt;Year: \", year,\n    \"&lt;br&gt;GDP per capita: \", format(round(gdpPercap), big.mark = \",\"),\n    \"&lt;br&gt;Life expectancy: \", round(lifeExp, 1), \" years\",\n    \"&lt;br&gt;Population: \", format(pop, big.mark = \",\")\n  ),\n  hoverinfo = \"text\", type = \"scatter\", mode = \"markers\",\n  marker = list(sizemode = \"area\", sizeref = 2.5, opacity = 0.7)\n) |&gt;\n  layout(\n    title = \"GDP per capita and life expectancy by country\",\n    xaxis = list(title = \"GDP per capita (log scale)\", type = \"log\"),\n    yaxis = list(title = \"Life expectancy (years)\"),\n    legend = list(title = list(text = \"Continent\"))\n  ) |&gt;\n  animation_opts(frame = 700, transition = 0, redraw = FALSE) |&gt;\n  animation_slider(currentvalue = list(prefix = \"Year: \")) |&gt;\n  animation_button(label = \"Play\")\n\nincome_health\n\n\n\n\n\n\nIn most years, the cloud slopes upward: countries with higher GDP per capita tend to have higher life expectancy. The points also show substantial variation. Countries with similar income can have different health outcomes, and the relationship shifts over time. The animation matters because it lets readers inspect those changes and individual countries instead of treating the full period as one snapshot."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html#compare-country-paths",
+    "href": "blog/posts/post7/blogpost7.html#compare-country-paths",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "2. Compare country paths",
+    "text": "2. Compare country paths\nThe animated chart is good for seeing the overall pattern, while lines make the direction of change easier to follow. The next chart compares five countries from different regions. Hover over a point to see its year, life expectancy, and income.\n\n\nCode\nselected &lt;- gm |&gt;\n  filter(country %in% c(\"China\", \"India\", \"Japan\", \"Nigeria\", \"United States\"))\n\ncountry_paths &lt;- plot_ly(\n  data = selected, x = ~year, y = ~lifeExp,\n  color = ~country,\n  text = ~paste0(\n    \"&lt;b&gt;\", country, \"&lt;/b&gt;&lt;br&gt;Year: \", year,\n    \"&lt;br&gt;Life expectancy: \", round(lifeExp, 1), \" years\",\n    \"&lt;br&gt;GDP per capita: \", format(round(gdpPercap), big.mark = \",\")\n  ),\n  hoverinfo = \"text\", type = \"scatter\", mode = \"lines+markers\"\n) |&gt;\n  layout(\n    title = \"Life expectancy in five countries\",\n    xaxis = list(title = \"Year\", dtick = 10),\n    yaxis = list(title = \"Life expectancy (years)\"),\n    legend = list(title = list(text = \"Country\"))\n  )\n\ncountry_paths\n\n\n\n\n\n\nThe selected paths rise overall, but their starting points and pace differ. This makes the broad upward association more concrete while showing why one country’s experience should not stand in for every country."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html#compare-countries-in-the-latest-year",
+    "href": "blog/posts/post7/blogpost7.html#compare-countries-in-the-latest-year",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "3. Compare countries in the latest year",
+    "text": "3. Compare countries in the latest year\nFinally, the boxplot compares the distribution of country life expectancy across continents in 2007, the latest year in the data. Boxes summarize each continent’s countries; individual points remain visible and identifiable by hovering.\n\n\nCode\nlatest &lt;- gm |&gt;\n  filter(year == max(year))\n\ncontinent_plot &lt;- plot_ly(\n  data = latest, x = ~continent, y = ~lifeExp,\n  color = ~continent,\n  text = ~paste0(\"&lt;b&gt;\", country, \"&lt;/b&gt;&lt;br&gt;Life expectancy: \", round(lifeExp, 1), \" years\"),\n  hoverinfo = \"text\", type = \"box\", boxpoints = \"all\",\n  jitter = 0.25, pointpos = 0,\n  marker = list(size = 5, opacity = 0.65)\n) |&gt;\n  layout(\n    title = \"Country life expectancy by continent, 2007\",\n    xaxis = list(title = \"Continent\"),\n    yaxis = list(title = \"Life expectancy (years)\"),\n    showlegend = FALSE\n  )\n\ncontinent_plot\n\n\n\n\n\n\nThe distributions show differences between continents and meaningful variation within them. Together, the figures show a general income-health association, changes over time, and differences among countries that a single global average would conceal."
+  },
+  {
+    "objectID": "blog/posts/post7/blogpost7.html#takeaway-and-limits",
+    "href": "blog/posts/post7/blogpost7.html#takeaway-and-limits",
+    "title": "Does Higher Income Mean Longer Lives?",
+    "section": "Takeaway and limits",
+    "text": "Takeaway and limits\nAcross these historical snapshots, higher GDP per capita generally goes together with longer life expectancy, but the relationship is not identical across countries or years. The interactive slider, hover details, and country-level points add value by letting readers explore when and where the pattern differs.\nThese data are country averages, not individual-level records. The five-year spacing also means the animation does not show annual change. Many other factors—including education, public health, conflict, and access to medical care—may influence life expectancy and income. A causal claim would require a different research design. Data source: the gapminder dataset bundled with the gapminder R package."
   }
 ]
