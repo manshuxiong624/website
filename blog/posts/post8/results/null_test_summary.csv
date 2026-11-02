@@ -1,0 +1,2 @@
+"n","null_mean","observed_mean","observed_t","alpha","critical_value","simulated_p_value","null_simulations"
+40,50,53.2751798884551,2.38702841219117,0.05,2.02269092003676,0.0222977702229777,10000

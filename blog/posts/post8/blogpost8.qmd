@@ -1,0 +1,320 @@
+---
+title: "How Does Statistical Inference Work?"
+subtitle: "A simulation of bootstrap confidence intervals and hypothesis tests"
+author: "Manshu"
+date: today
+categories: [simulation, statistics, inference]
+format:
+  html:
+    toc: true
+    code-fold: true
+execute:
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+required_packages <- c("plotly", "knitr")
+missing_packages <- required_packages[
+  !vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)
+]
+if (length(missing_packages) > 0) {
+  stop(
+    "Install the missing packages in the RStudio Console with: ",
+    "install.packages(c(",
+    paste(sprintf('"%s"', missing_packages), collapse = ", "), "))"
+  )
+}
+
+source("scripts/simulation_helpers.R")
+dir.create("results", showWarnings = FALSE)
+
+# Main settings: edit these values and re-render to explore another design.
+true_mean <- 50
+population_sd <- 10
+sample_size <- 40
+bootstrap_reps <- 1200
+coverage_reps <- 1200
+coverage_sample_size <- 100
+coverage_bootstrap_reps <- 499
+null_reps <- 10000
+confidence_levels <- c(0.90, 0.95, 0.99)
+
+set.seed(20261102)
+sample_x <- rnorm(sample_size, mean = true_mean, sd = population_sd)
+bootstrap_means <- bootstrap_mean(sample_x, B = bootstrap_reps)
+bootstrap_intervals <- bootstrap_ci(
+  sample_x, confidence_levels, B = bootstrap_reps
+)
+ci_95 <- bootstrap_intervals[bootstrap_intervals$confidence == 0.95, ]
+
+set.seed(4)
+coverage_results <- simulate_coverage(
+  reps = coverage_reps,
+  n = coverage_sample_size,
+  population_mean = true_mean,
+  population_sd = population_sd,
+  levels = confidence_levels,
+  B = coverage_bootstrap_reps
+)
+write.csv(coverage_results$summary, "results/coverage_summary.csv", row.names = FALSE)
+write.csv(coverage_results$intervals, "results/coverage_intervals.csv", row.names = FALSE)
+
+# For the test example, the null is H0: population mean = 50.
+# The observed sample is generated from a population with mean 53.
+set.seed(20261117)
+observed_x <- rnorm(sample_size, mean = true_mean + 3, sd = population_sd)
+observed_statistic <- (mean(observed_x) - true_mean) /
+  (sd(observed_x) / sqrt(sample_size))
+null_statistics <- simulate_null_t(
+  reps = null_reps, n = sample_size, null_mean = true_mean,
+  population_sd = population_sd
+)
+alpha <- 0.05
+critical_value <- qt(1 - alpha / 2, df = sample_size - 1)
+simulated_p_value <- (sum(abs(null_statistics) >= abs(observed_statistic)) + 1) /
+  (length(null_statistics) + 1)
+null_summary <- data.frame(
+  n = sample_size,
+  null_mean = true_mean,
+  observed_mean = mean(observed_x),
+  observed_t = observed_statistic,
+  alpha = alpha,
+  critical_value = critical_value,
+  simulated_p_value = simulated_p_value,
+  null_simulations = null_reps
+)
+write.csv(null_summary, "results/null_test_summary.csv", row.names = FALSE)
+
+# Compare bootstrap spread at different sample sizes using fresh samples.
+set.seed(20261104)
+comparison_sizes <- c(15, 40, 100)
+comparison_bootstrap <- do.call(rbind, lapply(comparison_sizes, function(n) {
+  x <- rnorm(n, mean = true_mean, sd = population_sd)
+  data.frame(
+    bootstrap_mean = bootstrap_mean(x, B = 700),
+    scenario = factor(paste("n =", n), levels = paste("n =", comparison_sizes))
+  )
+}))
+```
+
+## The question: how do we learn about a population from a sample?
+
+We usually cannot measure every person, firm, or country in a population. Instead, we take a sample and use it to estimate an unknown quantity. But how much should we trust that estimate? Simulation makes the answer visible: we can create a population with a known mean, repeatedly draw samples, and watch how estimates and statistical decisions vary.
+
+This post uses a simple setting throughout. The population is normally distributed with a true mean of 50 and a standard deviation of 10. Those values are known to the simulation, but an analyst would normally know neither population value. The examples use simulated data rather than observations about real people or firms, so the goal is to explain inference rather than make a substantive claim about an outside population.
+
+## 1. Build a bootstrap confidence interval
+
+Suppose we draw one sample of 40 observations. Its sample mean is `r round(mean(sample_x), 2)`, while the population mean is 50. A bootstrap treats the observed sample as a stand-in for the population: it repeatedly draws 40 observations **with replacement** from that sample and recalculates the mean. The resulting bootstrap distribution approximates how the sample mean would vary across repeated samples.
+
+The percentile confidence interval uses the 2.5th and 97.5th percentiles of the bootstrap means. Here the 95% interval is `r round(ci_95$lower, 2)` to `r round(ci_95$upper, 2)`. The figure shows the bootstrap distribution, its estimated interval, and the true mean used to generate the data. Hover to inspect the distribution, and use Plotly's zoom and pan controls to examine its spread.
+
+```{r}
+#| label: bootstrap-distribution
+#| fig-cap: "Repeated resampling approximates the sampling uncertainty in the mean."
+
+boot_plot <- plotly::plot_ly(
+  x = bootstrap_means,
+  type = "histogram",
+  nbinsx = 35,
+  marker = list(color = "#4C78A8", line = list(color = "white", width = 0.5)),
+  hovertemplate = "Bootstrap mean: %{x:.2f}<br>Resamples in bin: %{y}<extra></extra>"
+) |>
+  plotly::layout(
+    title = "Bootstrap distribution of the sample mean",
+    xaxis = list(title = "Mean in a resample"),
+    yaxis = list(title = "Number of bootstrap resamples"),
+    shapes = list(
+      list(type = "line", x0 = true_mean, x1 = true_mean, y0 = 0, y1 = 1,
+           yref = "paper", line = list(color = "#222222", width = 2, dash = "dash")),
+      list(type = "line", x0 = ci_95$lower, x1 = ci_95$lower, y0 = 0, y1 = 1,
+           yref = "paper", line = list(color = "#E45756", width = 2)),
+      list(type = "line", x0 = ci_95$upper, x1 = ci_95$upper, y0 = 0, y1 = 1,
+           yref = "paper", line = list(color = "#E45756", width = 2))
+    ),
+    annotations = list(
+      list(x = true_mean, y = 1, yref = "paper", text = "True mean",
+           showarrow = FALSE, yshift = 14),
+      list(x = ci_95$lower, y = 1, yref = "paper", text = "95% CI",
+           showarrow = FALSE, yshift = -8, xanchor = "right"),
+      list(x = ci_95$upper, y = 1, yref = "paper", text = "",
+           showarrow = FALSE)
+    )
+  ) |>
+  plotly::config(displaylogo = FALSE, responsive = TRUE)
+boot_plot
+```
+
+The bootstrap distribution is centered near the observed sample mean, not necessarily exactly at 50. Its width reflects sampling uncertainty for this particular sample. A confidence interval is therefore a procedure for producing plausible parameter values; it is not a guarantee that this one interval contains the truth.
+
+### What happens when sample size changes?
+
+The next interactive chart repeats the bootstrap for independent samples of 15, 40, and 100 observations from the same population. Click a legend entry to hide or show that sample-size distribution. The distributions become narrower as sample size grows because averages of larger samples tend to vary less.
+
+```{r}
+#| label: sample-size-comparison
+#| fig-cap: "Larger samples produce less variable bootstrap means in this simulation."
+
+size_plot <- plotly::plot_ly(
+  data = comparison_bootstrap,
+  x = ~bootstrap_mean,
+  color = ~scenario,
+  type = "histogram",
+  histnorm = "probability density",
+  nbinsx = 35,
+  opacity = 0.55,
+  hovertemplate = "%{fullData.name}<br>Bootstrap mean: %{x:.2f}<extra></extra>"
+) |>
+  plotly::add_lines(
+    x = c(true_mean, true_mean), y = c(0, 1),
+    name = "True population mean", inherit = FALSE,
+    line = list(color = "#222222", dash = "dash", width = 2),
+    hoverinfo = "skip"
+  ) |>
+  plotly::layout(
+    barmode = "overlay",
+    title = "Bootstrap means by sample size",
+    xaxis = list(title = "Mean in a resample"),
+    yaxis = list(title = "Density"),
+    legend = list(title = list(text = "Sample size"))
+  ) |>
+  plotly::config(displaylogo = FALSE, responsive = TRUE)
+size_plot
+```
+
+## 2. Does a 95% interval cover the truth 95% of the time?
+
+The phrase “95% confidence” describes the long-run performance of a method. To see that, the simulation draws `r coverage_reps` new samples of `r coverage_sample_size` observations from the same known population. For each sample it builds percentile bootstrap intervals at 90%, 95%, and 99% confidence levels, then records whether each interval contains 50. The code uses 499 bootstrap resamples per sample to keep the demonstration quick; more resamples would reduce Monte Carlo noise in the interval endpoints.
+
+Across `r coverage_reps` repeated samples, the 95% method has an empirical coverage rate of `r sprintf("%.1f%%", 100 * coverage_results$summary$coverage[coverage_results$summary$confidence == 0.95])`. Across all three levels the simulated coverage rates are `r paste(sprintf("%d%%: %.1f%%", 100 * coverage_results$summary$confidence, 100 * coverage_results$summary$coverage), collapse = "; ")`. These rates need not equal their nominal values exactly: they come from a finite number of samples and a finite number of bootstrap resamples.
+
+In the plot, each horizontal segment is one interval from the 95% procedure. Blue segments cover the true mean; orange segments miss it. The displayed 90 runs are a readable slice, while the reported coverage rate uses all 600 runs. Hover over any segment to see its endpoints and coverage result.
+
+```{r}
+#| label: coverage-intervals
+#| fig-cap: "Across repeated samples, most 95% intervals contain the known population mean."
+
+intervals_95 <- subset(coverage_results$intervals, confidence == 0.95)
+intervals_display <- head(intervals_95, 90)
+intervals_display$covered_label <- ifelse(intervals_display$covered, "Covers 50", "Misses 50")
+coverage_plot <- plotly::plot_ly(
+  data = intervals_display,
+  x = ~lower, xend = ~upper,
+  y = ~replicate, yend = ~replicate,
+  color = ~covered_label,
+  colors = c("Covers 50" = "#0072B2", "Misses 50" = "#D55E00"),
+  type = "scatter", mode = "lines",
+  line = list(width = 2),
+  text = ~paste0(
+    "Replicate: ", replicate,
+    "<br>Interval: [", round(lower, 2), ", ", round(upper, 2), "]",
+    "<br>", covered_label
+  ),
+  hoverinfo = "text"
+) |>
+  plotly::layout(
+    title = "Repeated 95% bootstrap intervals",
+    xaxis = list(title = "Confidence interval for the population mean"),
+    yaxis = list(title = "Simulation replicate", autorange = "reversed"),
+    shapes = list(list(
+      type = "line", x0 = true_mean, x1 = true_mean,
+      y0 = 0, y1 = 1, yref = "paper",
+      line = list(color = "#222222", dash = "dash", width = 2)
+    )),
+    annotations = list(list(
+      x = true_mean, y = 1, yref = "paper", text = "True mean = 50",
+      showarrow = FALSE, yshift = 14
+    ))
+  ) |>
+  plotly::config(displaylogo = FALSE, responsive = TRUE)
+coverage_plot
+```
+
+In repeated use, a correctly calibrated 95% confidence-interval procedure should cover the true parameter about 95% of the time. It does **not** mean there is a 95% probability that the fixed population mean is inside this already-computed interval. Once an interval is calculated, it either contains the parameter or it does not; the 95% refers to the procedure before seeing the data.
+
+## 3. Simulate a hypothesis test under the null
+
+Now consider the two-sided test
+
+$$H_0: \mu = 50 \qquad\text{versus}\qquad H_1: \mu \ne 50.$$
+
+If the null is true, repeated samples generate a distribution of t-statistics centered around zero. The 5% rejection rule places 2.5% of the null distribution in each tail. For a sample of 40, the critical values are approximately `r round(-critical_value, 2)` and `r round(critical_value, 2)`. Values farther into either tail fall in the rejection region.
+
+For an example, we generated one sample of 40 observations from a population with mean 53 and tested it against the null mean of 50. Its t-statistic is `r round(observed_statistic, 2)`. The simulated two-sided p-value is `r signif(simulated_p_value, 3)`: it is the fraction of null simulations with a t-statistic at least as far from zero as the observed statistic (with a small plus-one correction). `r if (simulated_p_value < alpha) "At the 5% level, this result falls in the rejection region, so we reject the null in this simulated example." else "At the 5% level, this result does not fall in the rejection region, so we do not reject the null in this simulated example."` A p-value is not the probability that the null hypothesis is true.
+
+In the figure, blue marks the simulated null distribution, orange marks simulated values at least as extreme as the observed statistic, dashed lines mark the 5% rejection cutoffs, and dotted lines mark the observed statistic and its two-sided mirror. Zoom or hover to inspect the tails.
+
+```{r}
+#| label: null-test-distribution
+#| fig-cap: "The p-value is the simulated null probability of a statistic at least as extreme as observed."
+
+null_plot <- plotly::plot_ly(
+  x = null_statistics,
+  type = "histogram", nbinsx = 60,
+  xbins = list(start = -4, end = 4, size = 0.2),
+  name = "Simulated under H0",
+  marker = list(color = "#4C78A8", line = list(color = "white", width = 0.3)),
+  hovertemplate = "t statistic: %{x:.2f}<br>Simulations in bin: %{y}<extra></extra>"
+) |>
+  plotly::add_trace(
+    x = null_statistics[abs(null_statistics) >= abs(observed_statistic)],
+    type = "histogram", nbinsx = 60,
+    xbins = list(start = -4, end = 4, size = 0.2),
+    name = "At least as extreme as observed",
+    marker = list(color = "#F28E2B", line = list(color = "white", width = 0.3)),
+    hovertemplate = "Extreme null t: %{x:.2f}<br>Simulations in bin: %{y}<extra></extra>"
+  ) |>
+  plotly::layout(
+    barmode = "overlay",
+    title = "Student t-statistics simulated when H0 is true",
+    xaxis = list(title = "t-statistic"),
+    yaxis = list(title = "Number of null simulations"),
+    shapes = list(
+      list(type = "line", x0 = -critical_value, x1 = -critical_value,
+           y0 = 0, y1 = 1, yref = "paper",
+           line = list(color = "#222222", dash = "dash", width = 2)),
+      list(type = "line", x0 = critical_value, x1 = critical_value,
+           y0 = 0, y1 = 1, yref = "paper",
+           line = list(color = "#222222", dash = "dash", width = 2)),
+      list(type = "line", x0 = observed_statistic, x1 = observed_statistic,
+           y0 = 0, y1 = 1, yref = "paper",
+           line = list(color = "#7A5195", dash = "dot", width = 2)),
+      list(type = "line", x0 = -observed_statistic, x1 = -observed_statistic,
+           y0 = 0, y1 = 1, yref = "paper",
+           line = list(color = "#7A5195", dash = "dot", width = 2))
+    ),
+    annotations = list(
+      list(x = -critical_value, y = 1, yref = "paper", text = "− critical value",
+           showarrow = FALSE, yshift = 14),
+      list(x = critical_value, y = 1, yref = "paper", text = "+ critical value",
+           showarrow = FALSE, yshift = 14),
+      list(x = observed_statistic, y = 1, yref = "paper", text = "Observed t",
+           showarrow = FALSE, yshift = -8)
+    ),
+    legend = list(title = list(text = "Null simulations"))
+  ) |>
+  plotly::config(displaylogo = FALSE, responsive = TRUE)
+null_plot
+```
+
+The test's p-value depends on the statistic's position in the null distribution, while the rejection region is set in advance by the chosen significance level. With many null simulations, the estimated p-value stabilizes; using fewer simulations would make the estimate noisier. A small p-value says the observed statistic would be unusual if the null model were correct. It does not measure the size or practical importance of an effect.
+
+## Explore the simulation
+
+The plots support hover, zoom, pan, and legend selection. To change the simulation itself, edit the settings in the setup code near the top of this file and render again. Try a larger `sample_size` or `coverage_sample_size`, more `bootstrap_reps`, more `coverage_reps`, or another `confidence_levels` vector. The generated CSV files in `results/` update when the article is rendered.
+
+## Takeaway and limitations
+
+Bootstrapping uses repeated resampling from one observed sample to approximate uncertainty. Repeating the full sampling process then shows what a confidence level means in the long run: the 95% procedure covers the known mean roughly 95% of the time, subject to simulation noise and the quality of the bootstrap approximation. Hypothesis testing uses a different reference distribution: simulate statistics under the null, identify the rejection tails, and compare the observed statistic to that distribution to obtain a p-value.
+
+This example uses normally distributed data and estimates only a mean, where the classical t-test is especially well behaved. Bootstrap coverage can be worse for small samples, highly skewed populations, or statistics near parameter boundaries. The figures also use finite Monte Carlo samples, so the displayed rates and p-value vary if the random seed or number of simulations changes. Simulation clarifies the logic of inference; it does not remove the need to judge whether a model fits the question.
+
+## Reproducibility and sources
+
+All observations are generated in R with fixed random seeds; no external dataset or API is used. The code and generated summaries are included or documented in this folder. See `README.md` for package installation and rendering instructions. The simulation functions are in `scripts/simulation_helpers.R`.
+
+For background on these methods, see the [R documentation for `quantile`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html) and the [R documentation for random sampling](https://stat.ethz.ch/R-manual/R-devel/library/base/html/sample.html). The article implements percentile bootstrap intervals directly so each step is visible.
