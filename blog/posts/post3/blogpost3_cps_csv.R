@@ -1,66 +1,17 @@
-# Blog Post 3: Education and unemployment in the U.S. labor market
-# Reproducible analysis for the IPUMS CPS Basic Monthly extract (2015--2024).
-#
-# Put cps_00003.csv in data/ and run this script from the project folder.
-# This script uses only base R (R >= 4.1.0); no package installation is needed.
+# Reproduces the weighted CPS summaries from an IPUMS Basic Monthly CSV extract.
+# Required variables: YEAR, AGE, EMPSTAT, EDUC, WTFINL.
+# Place cps_00003.csv in data/ before running this script.
 
-# Resolve paths from the script's location when it is sourced, and otherwise
-# fall back to the active RStudio project directory.
-script_path <- tryCatch(sys.frame(1)$ofile, error = function(e) NULL)
-project_dir <- if (!is.null(script_path)) {
-  dirname(normalizePath(script_path))
-} else {
-  normalizePath(getwd())
-}
-
-data_path <- Sys.getenv(
-  "CPS_DATA_PATH",
-  unset = file.path(project_dir, "data", "cps_00003.csv")
-)
-results_dir <- file.path(project_dir, "real_results")
-dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
-
+script_arg <- commandArgs(trailingOnly = FALSE)
+script_file <- sub("^--file=", "", script_arg[grepl("^--file=", script_arg)])
+post_dir <- if (length(script_file) == 1) dirname(normalizePath(script_file)) else normalizePath(getwd())
+data_path <- file.path(post_dir, "data", "cps_00003.csv")
 if (!file.exists(data_path)) {
-  stop(
-    "Missing input at ", data_path,
-    ". Place cps_00003.csv in data/, or set CPS_DATA_PATH to its full location."
-  )
+  stop("Missing data/cps_00003.csv. Download the IPUMS CPS Basic Monthly extract described in README.md.")
 }
 
-required_variables <- c("YEAR", "AGE", "SEX", "EMPSTAT", "EDUC", "WTFINL")
-csv_header <- names(read.csv(data_path, nrows = 0, check.names = FALSE))
-missing_variables <- setdiff(required_variables, csv_header)
-if (length(missing_variables) > 0) {
-  stop(
-    "The CSV is missing required variable(s): ",
-    paste(missing_variables, collapse = ", "),
-    ". Re-download the IPUMS extract with these variables included."
-  )
-}
-
-# Read only the variables used in the analysis. The selected CSV has 13.7 million
-# rows, so this may take several minutes and requires several GB of free memory.
-all_names <- c(
-  "YEAR", "SERIAL", "MONTH", "HWTFINL", "CPSID", "ASECFLAG", "PERNUM",
-  "WTFINL", "CPSIDP", "CPSIDV", "AGE", "SEX", "EMPSTAT", "EDUC"
-)
-classes <- rep("NULL", length(all_names))
-names(classes) <- all_names
-classes[c("YEAR", "AGE", "SEX", "EMPSTAT", "EDUC")] <- "integer"
-classes["WTFINL"] <- "numeric"
-
-cps <- read.csv(
-  data_path,
-  colClasses = classes,
-  na.strings = "",
-  check.names = FALSE
-)
-
-if (!identical(as.integer(sort(unique(cps$YEAR))), 2015:2024)) {
-  stop("Unexpected YEAR values. This project requires Basic Monthly CPS samples for 2015--2024.")
-}
-
-# IPUMS CPS EDUC codes in the 2015--2024 Basic Monthly samples.
+cps <- read.csv(data_path, colClasses = c(YEAR = "integer", AGE = "integer", EMPSTAT = "integer",
+                                          EDUC = "integer", WTFINL = "numeric"))
 education_group <- function(x) {
   out <- rep(NA_character_, length(x))
   out[x %in% c(2, 10, 20, 30, 40, 50, 60, 71)] <- "Less than high school"
@@ -68,87 +19,18 @@ education_group <- function(x) {
   out[x %in% c(81, 91, 92)] <- "Some college / associate"
   out[x == 111] <- "Bachelor's degree"
   out[x %in% c(123, 124, 125)] <- "Graduate degree"
-  factor(
-    out,
-    levels = c(
-      "Less than high school", "High school", "Some college / associate",
-      "Bachelor's degree", "Graduate degree"
-    )
-  )
+  factor(out, levels = c("Less than high school", "High school", "Some college / associate",
+                         "Bachelor's degree", "Graduate degree"))
 }
 
-# EMPSTAT 10 and 12 are employed; 21 and 22 are unemployed.
-# This defines unemployment as unemployed / civilian labor force.
 cps$education <- education_group(cps$EDUC)
-cps$age_group <- cut(
-  cps$AGE,
-  breaks = c(24, 34, 54, 64),
-  labels = c("25--34", "35--54", "55--64")
-)
-
-analysis <- cps[
-  cps$AGE >= 25 & cps$AGE <= 64 &
-    cps$EMPSTAT %in% c(10, 12, 21, 22) &
-    !is.na(cps$education) &
-    !is.na(cps$WTFINL) & cps$WTFINL > 0,
-]
+analysis <- cps[cps$AGE >= 25 & cps$AGE <= 64 & cps$EMPSTAT %in% c(10, 12, 21, 22) &
+                !is.na(cps$education) & !is.na(cps$WTFINL) & cps$WTFINL > 0, ]
 analysis$unemployed_weight <- analysis$WTFINL * (analysis$EMPSTAT %in% c(21, 22))
 
-if (nrow(analysis) == 0) {
-  stop("The analytical sample is empty. Check AGE, EMPSTAT, EDUC, and WTFINL in the input extract.")
-}
-
-# Every rate uses WTFINL, IPUMS CPS's final person-level Basic Monthly weight.
-annual <- aggregate(
-  cbind(labor_force_population = WTFINL, unemployed_weight) ~ YEAR + education,
-  data = analysis,
-  FUN = sum
-)
+annual <- aggregate(cbind(labor_force_population = WTFINL, unemployed_weight) ~ YEAR + education,
+                    data = analysis, FUN = sum)
 annual$unemployment_rate <- annual$unemployed_weight / annual$labor_force_population
 annual <- annual[order(annual$YEAR, annual$education), ]
-
-annual_age <- aggregate(
-  cbind(labor_force_population = WTFINL, unemployed_weight) ~ YEAR + age_group + education,
-  data = analysis[!is.na(analysis$age_group), ],
-  FUN = sum
-)
-annual_age$unemployment_rate <- annual_age$unemployed_weight / annual_age$labor_force_population
-annual_age <- annual_age[order(annual_age$YEAR, annual_age$age_group, annual_age$education), ]
-
-write.csv(
-  annual,
-  file.path(results_dir, "annual_unemployment_by_education.csv"),
-  row.names = FALSE
-)
-write.csv(
-  annual_age,
-  file.path(results_dir, "annual_unemployment_by_age_and_education.csv"),
-  row.names = FALSE
-)
-write.csv(
-  annual[annual$YEAR %in% c(2019, 2020, 2024), ],
-  file.path(results_dir, "headline_results_table.csv"),
-  row.names = FALSE
-)
-
-# Write an audit-friendly run record. It records exactly which source file and
-# R version generated the current tables and figures without copying raw data.
-input_info <- file.info(data_path)
-run_manifest <- c(
-  "Blog Post 3 CPS analysis run",
-  paste("Run time:", format(Sys.time(), tz = "UTC", usetz = TRUE)),
-  paste("R version:", R.version.string),
-  paste("Input file:", normalizePath(data_path)),
-  paste("Input bytes:", input_info$size),
-  paste("Input modified:", format(input_info$mtime, tz = "UTC", usetz = TRUE)),
-  paste("Input rows:", nrow(cps)),
-  paste("Analytical rows:", nrow(analysis)),
-  "Population: civilian labor-force participants ages 25--64",
-  "Weight: WTFINL (IPUMS CPS Final Basic Weight)",
-  "Unemployed EMPSTAT codes: 21 and 22",
-  "Education groups: less than high school, high school, some college/associate, bachelor's, graduate"
-)
-writeLines(run_manifest, file.path(results_dir, "analysis_manifest.txt"))
-capture.output(sessionInfo(), file = file.path(results_dir, "session_info.txt"))
-
-source(file.path(project_dir, "make_figures.R"), local = TRUE)
+write.csv(annual, file.path(post_dir, "results", "annual_unemployment_by_education.csv"), row.names = FALSE)
+source(file.path(post_dir, "make_figures.R"))

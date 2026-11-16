@@ -1,12 +1,4 @@
-# Large, reproducible IPUMS source data should not be committed.
-data/*.csv
-data/*.dta
-data/*.dat
-
-# RStudio session files
+data/cps_00003.csv
 .Rhistory
 .RData
 .Ruserdata
-
-/.quarto/
-**/*.quarto_ipynb
