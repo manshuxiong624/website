@@ -1,0 +1,71 @@
+{
+  "selected_parameters": {
+    "n_estimators": 50,
+    "max_depth": 1,
+    "min_samples_leaf": 20,
+    "learning_rate": 0.01
+  },
+  "baseline_parameters": {
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 2,
+    "min_samples_leaf": 5,
+    "random_state": 6400
+  },
+  "n_observations": 1838,
+  "test_observations": 368,
+  "simple_features": [
+    "FTSE_lag0",
+    "FTSE_lag1",
+    "FTSE_lag2",
+    "FTSE_lag3",
+    "FTSE_lag4"
+  ],
+  "richer_features": [
+    "FTSE_lag0",
+    "FTSE_lag1",
+    "FTSE_lag2",
+    "FTSE_lag3",
+    "FTSE_lag4",
+    "DAX_momentum5",
+    "DAX_volatility5",
+    "DAX_momentum20",
+    "DAX_volatility20",
+    "DAX_return",
+    "SMI_momentum5",
+    "SMI_volatility5",
+    "SMI_momentum20",
+    "SMI_volatility20",
+    "SMI_return",
+    "CAC_momentum5",
+    "CAC_volatility5",
+    "CAC_momentum20",
+    "CAC_volatility20",
+    "CAC_return",
+    "FTSE_momentum5",
+    "FTSE_volatility5",
+    "FTSE_momentum20",
+    "FTSE_volatility20"
+  ],
+  "class_simulation": [
+    {
+      "model": "Training mean",
+      "test_mse": 8.682212188821696
+    },
+    {
+      "model": "Class 21 boosting",
+      "test_mse": 2.707639438966549
+    }
+  ],
+  "versions": {
+    "python": "3.12.4",
+    "sklearn": "1.4.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "matplotlib": "3.8.4"
+  },
+  "data_period": "1991-1998; observation order only; no daily calendar dates provided",
+  "trading_rule": "Signal through t; execution t+1 close; return t+1 to t+2; long iff forecast > 0",
+  "cash_return": 0,
+  "cost_basis_points": 10
+}

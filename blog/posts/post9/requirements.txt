@@ -1,0 +1,5 @@
+# Versions used for the supplied results; newer versions may change results slightly.
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+matplotlib==3.8.4

@@ -1,0 +1,5 @@
+split,rows,feature_start,feature_end,target_end
+Training,1100,21,1120,1122
+Validation,366,1123,1488,1490
+Final refit,1468,21,1488,1490
+Test,368,1491,1858,1860
