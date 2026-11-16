@@ -2,7 +2,7 @@
 title: "Does Higher Income Mean Longer Lives?"
 subtitle: "What country-level data show from 1952 to 2007"
 author: "Manshu"
-date: today
+date: "2026-10-26"
 categories: [interactive visualization, development]
 format:
   html:

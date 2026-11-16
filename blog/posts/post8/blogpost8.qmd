@@ -2,7 +2,7 @@
 title: "How Does Statistical Inference Work?"
 subtitle: "A simulation of bootstrap confidence intervals and hypothesis tests"
 author: "Manshu"
-date: today
+date: "2026-11-02"
 categories: [simulation, statistics, inference]
 format:
   html:
